@@ -46,18 +46,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyPart(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddPartScreen.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
-    }
-    
-    public void changeScreenDeletePart(ActionEvent event) throws IOException 
-    {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddPartScreen.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("ModifyPartScreen.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -68,7 +57,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenAddProduct(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddPartScreen.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddProductScreen.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -79,18 +68,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyProduct(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddPartScreen.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
-    }
-    
-    public void changeScreenDeleteProduct(ActionEvent event) throws IOException 
-    {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddPartScreen.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("ModifyProductScreen.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

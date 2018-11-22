@@ -10,13 +10,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="javafxapplication2.ModifyPartScreenController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxapplication2.ModifyPartScreenController">
    <children>
       <HBox layoutX="184.0" layoutY="334.0" prefHeight="52.0" prefWidth="141.0" spacing="20.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Save" />
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
+            <Button mnemonicParsing="false" onAction="#changeScreenGoBack" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
          </children>
       </HBox>
       <VBox layoutX="25.0" layoutY="63.0" prefHeight="258.0" prefWidth="323.0">
@@ -28,7 +27,7 @@
                         <Insets />
                      </HBox.margin>
                   </Label>
-                  <TextField />
+                  <TextField accessibleRole="BUTTON" disable="true" editable="false" promptText="Auto Gen - Disabled" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
@@ -41,7 +40,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <TextField>
+                  <TextField promptText="Part Name">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -51,19 +50,19 @@
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefWidth="80.0" text="Inv" />
-                  <TextField />
+                  <TextField promptText="Inv" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefWidth="80.0" text="Price/Cost" />
-                  <TextField />
+                  <TextField promptText="Price/Cost" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="80.0" text="Max" />
-                  <TextField prefHeight="25.0" prefWidth="75.0">
+                  <TextField prefHeight="25.0" prefWidth="75.0" promptText="Max">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -73,13 +72,13 @@
                         <Insets right="20.0" />
                      </padding>
                   </Label>
-                  <TextField prefWidth="75.0" />
+                  <TextField prefWidth="75.0" promptText="Min" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label minWidth="80.0" text="Machine ID" />
-                  <TextField />
+                  <TextField promptText="Mach ID" />
                </children>
             </HBox>
          </children>
@@ -91,12 +90,12 @@
       </Label>
       <HBox layoutX="108.0" layoutY="14.0" prefHeight="41.0" prefWidth="217.0">
          <children>
-            <RadioButton mnemonicParsing="false" text="RadioButton">
+            <RadioButton mnemonicParsing="false" text="In-House">
                <padding>
                   <Insets right="30.0" />
                </padding>
             </RadioButton>
-            <RadioButton mnemonicParsing="false" text="RadioButton" />
+            <RadioButton mnemonicParsing="false" text="Outsourced" />
          </children>
       </HBox>
    </children>
