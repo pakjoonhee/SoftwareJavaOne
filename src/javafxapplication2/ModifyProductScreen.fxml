@@ -76,12 +76,7 @@
                   <TextField prefWidth="75.0" promptText="Min" />
                </children>
             </HBox>
-            <HBox prefHeight="41.0" prefWidth="198.0">
-               <children>
-                  <Label minWidth="80.0" text="Machine ID" />
-                  <TextField promptText="Mach ID" />
-               </children>
-            </HBox>
+            <HBox prefHeight="41.0" prefWidth="198.0" />
          </children>
       </VBox>
       <HBox layoutX="389.0" layoutY="13.0" prefHeight="35.0" prefWidth="200.0">
@@ -90,20 +85,20 @@
             <TextField />
          </children>
       </HBox>
-      <TableView layoutX="320.0" layoutY="48.0" prefHeight="120.0" prefWidth="355.0">
+      <TableView layoutX="320.0" layoutY="48.0" prefHeight="120.0" prefWidth="360.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+          <TableColumn prefWidth="90.0" text="Part ID" />
+          <TableColumn prefWidth="90.0" text="Part Name" />
+            <TableColumn prefWidth="90.0" text="Inventory Level" />
+            <TableColumn prefWidth="90.0" text="Price Per Unit" />
         </columns>
       </TableView>
-      <TableView layoutX="320.0" layoutY="225.0" prefHeight="120.0" prefWidth="355.0">
+      <TableView layoutX="320.0" layoutY="225.0" prefHeight="120.0" prefWidth="360.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="C1" />
-            <TableColumn prefWidth="75.0" text="C2" />
-            <TableColumn prefWidth="75.0" text="Column X" />
-            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="90.0" text="Part ID" />
+            <TableColumn prefWidth="90.0" text="Part Name" />
+            <TableColumn prefWidth="90.0" text="Inventory Level" />
+            <TableColumn prefWidth="90.0" text="Price Per Unit" />
          </columns>
       </TableView>
       <Button layoutX="612.0" layoutY="355.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Delete" />

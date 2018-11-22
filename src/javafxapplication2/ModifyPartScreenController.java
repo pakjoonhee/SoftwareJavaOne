@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxapplication2;
 
 import java.io.IOException;
@@ -15,14 +10,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
+    @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
+    @FXML private TextField changeTextField;
     private ToggleGroup sourceButtonGroup;
+
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
@@ -33,6 +33,18 @@ public class ModifyPartScreenController implements Initializable {
         
         window.setScene(tableViewScene);
         window.show();
+    }
+    
+    public void radioButtonToggled() 
+    {
+        if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) {
+            machineIDLabel.setText("Machine ID");
+            changeTextField.setPromptText("Mach ID");
+        }
+        if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
+            machineIDLabel.setText("Company Name");
+            changeTextField.setPromptText("Comp Nm");
+        }
     }
     
     @Override
