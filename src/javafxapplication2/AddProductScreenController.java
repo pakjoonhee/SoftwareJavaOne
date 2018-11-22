@@ -9,23 +9,18 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author pakjo
- */
 public class AddProductScreenController implements Initializable {
-
-    /**
-     * Initializes the controller class.
-     */
+    
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
@@ -39,7 +34,7 @@ public class AddProductScreenController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+      
     }    
     
 }
