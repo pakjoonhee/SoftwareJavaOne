@@ -32,7 +32,7 @@
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#changeScreenAddPart" text="Add" />
-                  <Button mnemonicParsing="false" text="Modify" />
+                  <Button mnemonicParsing="false" onAction="#changeScreenModifyPart" text="Modify" />
                   <Button mnemonicParsing="false" text="Delete" />
                </children>
                <VBox.margin>
@@ -59,8 +59,8 @@
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" text="Add" />
-                  <Button mnemonicParsing="false" text="Modify" />
+                  <Button mnemonicParsing="false" onAction="#changeScreenAddProduct" text="Add" />
+                  <Button mnemonicParsing="false" onAction="#changeScreenModifyProduct" text="Modify" />
                   <Button mnemonicParsing="false" text="Delete" />
                </children>
                <VBox.margin>
