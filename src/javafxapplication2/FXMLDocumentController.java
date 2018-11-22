@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -25,13 +26,13 @@ import javafx.stage.Stage;
 public class FXMLDocumentController implements Initializable {
     
     @FXML
-    private Label label;
+    private Button exitButton;
     
     @FXML
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+     private void exitButtonAction(){
+         Stage stage = (Stage) exitButton.getScene().getWindow();
+         stage.close();
+     }
     
     public void changeScreenAddPart(ActionEvent event) throws IOException 
     {

@@ -50,6 +50,7 @@ public class ModifyPartScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sourceButtonGroup = new ToggleGroup();
+        this.inHouseButton.setSelected(true);
         this.inHouseButton.setToggleGroup(sourceButtonGroup);
         this.outsourcedButton.setToggleGroup(sourceButtonGroup);
     }    
