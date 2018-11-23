@@ -8,6 +8,8 @@ package javafxapplication2;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,16 +19,25 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-/**
- *
- * @author pakjo
- */
+
 public class FXMLDocumentController implements Initializable {
+    @FXML private Button exitButton;
+    @FXML private TableView<Parts> partTableView;
+    @FXML private TableColumn<Parts, String> partIdColumn;
+    @FXML private TableColumn<Parts, String> partNameColumn;
+    @FXML private TableColumn<Parts, Integer> partInventoryColumn;
+    @FXML private TableColumn<Parts, Double> partPriceColumn;
     
-    @FXML
-    private Button exitButton;
+    @FXML private TableView<Products> productTableView;
+    @FXML private TableColumn<Products, String> productIdColumn;
+    @FXML private TableColumn<Products, String> productNameColumn;
+    @FXML private TableColumn<Products, Integer> productInventoryColumn;
+    @FXML private TableColumn<Products, Double> productPriceColumn;
     
     @FXML
      private void exitButtonAction(){
@@ -80,7 +91,35 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        partIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partID"));
+        partNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partName"));
+        partInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partInventory"));
+        partPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, Double>("partPrice"));
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productID"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productName"));
+        productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, Double>("productPrice"));
+        partTableView.setItems(getParts());
+        productTableView.setItems(getProducts());
     }    
+    
+    public ObservableList<Parts> getParts() 
+    {
+       ObservableList<Parts> parts = FXCollections.observableArrayList();
+       parts.add(new Parts("A1", "Steal Beam", 2, 2.01));
+       parts.add(new Parts("A2", "ScrewDriver", 5, 3.00));
+       parts.add(new Parts("A4", "Nuts", 11, 4.00));
+       return parts;
+    }
+    
+    public ObservableList<Products> getProducts()
+    {
+        ObservableList<Products> products = FXCollections.observableArrayList();
+        products.add(new Products("B1", "Diapers", 10, 1.01));
+        products.add(new Products("B2", "Towels", 2, 2.02));
+        products.add(new Products("B3", "Napkins", 8, 3.03));
+        products.add(new Products("B4", "Soap", 12, 4.04));
+        return products;
+    }
     
 }

@@ -21,12 +21,12 @@
                   <TextField />
                </children>
             </HBox>
-            <TableView prefHeight="180.0" prefWidth="400.0">
+            <TableView fx:id="partTableView" prefHeight="180.0" prefWidth="400.0">
               <columns>
-                <TableColumn prefWidth="115.0" text="Part ID" />
-                <TableColumn prefWidth="115.0" text="Part Name" />
-                  <TableColumn prefWidth="115.0" text="Inventory Level" />
-                  <TableColumn prefWidth="115.0" text="Price/Cost per Unit" />
+                <TableColumn fx:id="partIdColumn" prefWidth="115.0" text="Part ID" />
+                <TableColumn fx:id="partNameColumn" prefWidth="115.0" text="Part Name" />
+                  <TableColumn fx:id="partInventoryColumn" prefWidth="115.0" text="Inventory Level" />
+                  <TableColumn fx:id="partPriceColumn" prefWidth="115.0" text="Price/Cost per Unit" />
               </columns>
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">
@@ -49,12 +49,12 @@
                   <TextField />
                </children>
             </HBox>
-            <TableView prefHeight="180.0" prefWidth="400.0">
+            <TableView fx:id="productTableView" prefHeight="180.0" prefWidth="400.0">
                <columns>
-                  <TableColumn prefWidth="115.0" text="Product ID" />
-                  <TableColumn prefWidth="115.0" text="Product Name" />
-                  <TableColumn prefWidth="115.0" text="Inventory Level" />
-                  <TableColumn prefWidth="115.0" text="Price Per Unit" />
+                  <TableColumn fx:id="productIdColumn" prefWidth="115.0" text="Product ID" />
+                  <TableColumn fx:id="productNameColumn" prefWidth="115.0" text="Product Name" />
+                  <TableColumn fx:id="productInventoryColumn" prefWidth="115.0" text="Inventory Level" />
+                  <TableColumn fx:id="productPriceColumn" prefWidth="115.0" text="Price Per Unit" />
                </columns>
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">
