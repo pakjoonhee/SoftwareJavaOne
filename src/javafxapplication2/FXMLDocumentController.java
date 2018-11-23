@@ -49,8 +49,6 @@ public class FXMLDocumentController implements Initializable {
          stage.close();
      }
      
-     
-    
     public void changeScreenAddPart(ActionEvent event) throws IOException 
     {
         FXMLLoader loader = new FXMLLoader();
@@ -86,10 +84,6 @@ public class FXMLDocumentController implements Initializable {
         window.show();
     }
     
-    public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, String partPrice) {
-         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice));
-     } 
-    
     public void changeScreenAddProduct(ActionEvent event) throws IOException 
     {
         Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddProductScreen.fxml"));
@@ -112,6 +106,10 @@ public class FXMLDocumentController implements Initializable {
         window.show();
     }
     
+    public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, String partPrice) {
+         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice));
+     } 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         partIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partID"));
@@ -123,8 +121,6 @@ public class FXMLDocumentController implements Initializable {
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
         partTableView.setItems(getParts());
-        
-      
     }    
     
     public ObservableList<Parts> getParts() 

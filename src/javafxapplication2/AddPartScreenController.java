@@ -23,6 +23,10 @@ public class AddPartScreenController implements Initializable {
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
     @FXML private TextField changeTextField;
+//    @FXML private TextField partIdTextField;
+    @FXML private TextField partNameTextField;
+    @FXML private TextField partInventoryTextField;
+    @FXML private TextField partPriceTextField;
     private ToggleGroup sourceButtonGroup;
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
@@ -48,8 +52,8 @@ public class AddPartScreenController implements Initializable {
         }
     }
     
-    public void initPartData(Parts parts) {
-         selectedPart = parts;
+    public void addPartButton() {
+         Parts newPart = new Parts();
          
      }
      
