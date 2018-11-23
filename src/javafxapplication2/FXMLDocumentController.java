@@ -77,13 +77,18 @@ public class FXMLDocumentController implements Initializable {
         Scene tableViewScene = new Scene(tableViewParent);
         
         ModifyPartScreenController controller = loader.getController();
-        controller.initProductData(productTableView.getSelectionModel().getSelectedItem());
+        controller.initPartData(partTableView.getSelectionModel().getSelectedItem(), 
+                partTableView.getSelectionModel().selectedIndexProperty().get());
                         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
         window.setScene(tableViewScene);
         window.show();
     }
+    
+    public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, String partPrice) {
+         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice));
+     } 
     
     public void changeScreenAddProduct(ActionEvent event) throws IOException 
     {
@@ -118,7 +123,7 @@ public class FXMLDocumentController implements Initializable {
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
         partTableView.setItems(getParts());
-        productTableView.setItems(getProducts());
+        
       
     }    
     

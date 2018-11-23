@@ -50,6 +50,7 @@ public class AddPartScreenController implements Initializable {
     
     public void initPartData(Parts parts) {
          selectedPart = parts;
+         
      }
      
     @Override

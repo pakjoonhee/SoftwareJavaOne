@@ -17,19 +17,46 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
-    private Products selectedProduct;
+    private Parts selectedProduct;
     @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
     @FXML private TextField changeTextField;
+    @FXML private TextField partNameTextField;
+    @FXML private TextField partInventoryTextField;
+    @FXML private TextField partPriceTextField;
+    @FXML private TextField maxTextField;
+    @FXML private TextField minTextField;
+    private String partID;
+    private Integer rowNumber;
     private ToggleGroup sourceButtonGroup;
 
     
-    public void changeScreenGoBack(ActionEvent event) throws IOException 
+    public void cancelButtonGoBack(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        Parent tableViewParent = loader.load();
+        
+        Scene tableViewScene = new Scene(tableViewParent);
+                
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
+    }
+    
+    public void submitButtonGoBack(ActionEvent event) throws IOException 
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        Parent tableViewParent = loader.load();
+        
         Scene tableViewScene = new Scene(tableViewParent);
         
+        FXMLDocumentController controller = loader.getController();
+        controller.getDataCallback(rowNumber, partID, partNameTextField.getText(), Integer.parseInt(partInventoryTextField.getText()), partPriceTextField.getText());
+                
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
         window.setScene(tableViewScene);
@@ -48,8 +75,13 @@ public class ModifyPartScreenController implements Initializable {
         }
     }
     
-    public void initProductData(Products products) {
-         selectedProduct = products;
+    public void initPartData(Parts parts, Integer rowNumber) {
+         selectedProduct = parts;
+         partID = selectedProduct.getPartID();
+         partNameTextField.setText(selectedProduct.getPartName());
+         partInventoryTextField.setText(Integer.toString(selectedProduct.getPartInventory()));
+         partPriceTextField.setText(selectedProduct.getPartPrice());
+         this.rowNumber = rowNumber;
      } 
     
     @Override
