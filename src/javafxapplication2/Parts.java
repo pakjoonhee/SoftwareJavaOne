@@ -12,13 +12,13 @@ import javafx.beans.property.SimpleStringProperty;
 public class Parts {
     private SimpleStringProperty partID, partName;
     private SimpleIntegerProperty partInventory;
-    private SimpleDoubleProperty partPrice;
+    private SimpleStringProperty partPrice;
 
-    public Parts(String partID, String partName, Integer partInventory, Double partPrice) {
+    public Parts(String partID, String partName, Integer partInventory, String partPrice) {
         this.partID = new SimpleStringProperty(partID);
         this.partName = new SimpleStringProperty(partName);
         this.partInventory = new SimpleIntegerProperty(partInventory);
-        this.partPrice = new SimpleDoubleProperty(partPrice);
+        this.partPrice = new SimpleStringProperty(partPrice);
     }
 
     public String getPartID() {
@@ -45,11 +45,11 @@ public class Parts {
         this.partInventory = partInventory;
     }
 
-    public Double getPartPrice() {
+    public String getPartPrice() {
         return partPrice.get();
     }
 
-    public void setPartPrice(SimpleDoubleProperty partPrice) {
+    public void setPartPrice(SimpleStringProperty partPrice) {
         this.partPrice = partPrice;
     }
     

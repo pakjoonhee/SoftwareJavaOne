@@ -8,13 +8,13 @@ import javafx.beans.property.SimpleStringProperty;
 public class Products {
     private SimpleStringProperty productID, productName;
     private SimpleIntegerProperty productInventory;
-    private SimpleDoubleProperty productPrice;
+    private SimpleStringProperty productPrice;
     
-    public Products(String productID, String productName, Integer productInventory, Double productPrice) {
+    public Products(String productID, String productName, Integer productInventory, String productPrice) {
         this.productID = new SimpleStringProperty(productID);
         this.productName = new SimpleStringProperty(productName);
         this.productInventory = new SimpleIntegerProperty(productInventory);
-        this.productPrice = new SimpleDoubleProperty(productPrice);
+        this.productPrice = new SimpleStringProperty(productPrice);
     }
 
     public String getProductID() {
@@ -41,11 +41,11 @@ public class Products {
         this.productInventory = productInventory;
     }
 
-    public Double getProductPrice() {
+    public String getProductPrice() {
         return productPrice.get();
     }
 
-    public void setProductPrice(SimpleDoubleProperty productPrice) {
+    public void setProductPrice(SimpleStringProperty productPrice) {
         this.productPrice = productPrice;
     }
 }
