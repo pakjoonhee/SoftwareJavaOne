@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 
 public class AddPartScreenController implements Initializable {
+    private Parts selectedPart;
     @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
@@ -47,6 +48,10 @@ public class AddPartScreenController implements Initializable {
         }
     }
     
+    public void initPartData(Parts parts) {
+         selectedPart = parts;
+     }
+     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sourceButtonGroup = new ToggleGroup();

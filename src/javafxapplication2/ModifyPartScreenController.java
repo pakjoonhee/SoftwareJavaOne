@@ -17,6 +17,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
+    private Products selectedProduct;
     @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
@@ -46,6 +47,10 @@ public class ModifyPartScreenController implements Initializable {
             changeTextField.setPromptText("Comp Nm");
         }
     }
+    
+    public void initProductData(Products products) {
+         selectedProduct = products;
+     } 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {

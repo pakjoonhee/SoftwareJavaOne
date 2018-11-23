@@ -5,6 +5,7 @@
  */
 package javafxapplication2;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -28,6 +29,7 @@ import javafx.stage.Stage;
 
 
 public class FXMLDocumentController implements Initializable {
+    
     @FXML private Button exitButton;
     @FXML private TableView<Parts> partTableView;
     @FXML private TableColumn<Parts, String> partIdColumn;
@@ -40,18 +42,25 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableColumn<Products, String> productNameColumn;
     @FXML private TableColumn<Products, Integer> productInventoryColumn;
     @FXML private TableColumn<Products, String> productPriceColumn;
-    private DecimalFormat df = new DecimalFormat(".##");
     
     @FXML
      private void exitButtonAction(){
          Stage stage = (Stage) exitButton.getScene().getWindow();
          stage.close();
      }
+     
+     
     
     public void changeScreenAddPart(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddPartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("AddPartScreen.fxml"));
+        Parent tableViewParent = loader.load();
+        
         Scene tableViewScene = new Scene(tableViewParent);
+        
+        AddPartScreenController controller = loader.getController();
+        controller.initPartData(partTableView.getSelectionModel().getSelectedItem());
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
@@ -61,9 +70,15 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyPart(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("ModifyPartScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("ModifyPartScreen.fxml"));
+        Parent tableViewParent = loader.load();
+        
         Scene tableViewScene = new Scene(tableViewParent);
         
+        ModifyPartScreenController controller = loader.getController();
+        controller.initProductData(productTableView.getSelectionModel().getSelectedItem());
+                        
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
         window.setScene(tableViewScene);
@@ -104,6 +119,7 @@ public class FXMLDocumentController implements Initializable {
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
         partTableView.setItems(getParts());
         productTableView.setItems(getProducts());
+      
     }    
     
     public ObservableList<Parts> getParts() 
@@ -124,5 +140,4 @@ public class FXMLDocumentController implements Initializable {
         products.add(new Products("B4", "Soap", 12, "4.04"));
         return products;
     }
-    
 }
