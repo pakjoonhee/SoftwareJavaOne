@@ -27,6 +27,9 @@ public class AddPartScreenController implements Initializable {
     @FXML private TextField partNameTextField;
     @FXML private TextField partInventoryTextField;
     @FXML private TextField partPriceTextField;
+    @FXML private TextField partMaxTextField;
+    @FXML private TextField partMinTextField;
+    @FXML private TextField partCompanyMachineIDTextField;
     private ToggleGroup sourceButtonGroup;
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
@@ -52,8 +55,26 @@ public class AddPartScreenController implements Initializable {
         }
     }
     
-    public void addPartButton() {
-//         Parts newPart = new Parts();
+    public void addPartButton(ActionEvent event) throws IOException {
+        
+        
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        Parent tableViewParent = loader.load();
+        
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        FXMLDocumentController controller = loader.getController();
+        controller.addDataCallback("Blah", partNameTextField.getText(), 
+                                  Integer.parseInt(partInventoryTextField.getText()), 
+                                  partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
+                                  Integer.parseInt(partMinTextField.getText()), partCompanyMachineIDTextField.getText());
+        
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
          
      }
      

@@ -114,6 +114,11 @@ public class FXMLDocumentController implements Initializable {
          partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice, partMax, partMin, partcompanyMachineID));
      } 
     
+    public void addDataCallback(String partID, String partName, Integer partInventory, 
+                                String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
+         partTableView.getItems().add(new Parts(partID, partName, partInventory, partPrice, partMax, partMin, partcompanyMachineID));
+     } 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         partIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partID"));
