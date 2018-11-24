@@ -18,7 +18,7 @@
             <HBox prefHeight="35.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" text="Search" />
-                  <TextField />
+                  <TextField fx:id="partSearchTextField" />
                </children>
             </HBox>
             <TableView fx:id="partTableView" prefHeight="179.0" prefWidth="400.0">
@@ -36,7 +36,7 @@
                <children>
                   <Button mnemonicParsing="false" onAction="#changeScreenAddPart" text="Add" />
                   <Button mnemonicParsing="false" onAction="#changeScreenModifyPart" text="Modify" />
-                  <Button mnemonicParsing="false" text="Delete" />
+                  <Button mnemonicParsing="false" onAction="#deletePart" text="Delete" />
                </children>
                <VBox.margin>
                   <Insets top="20.0" />

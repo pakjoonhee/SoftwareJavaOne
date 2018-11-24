@@ -9,6 +9,8 @@ import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +26,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -49,11 +52,30 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableColumn<Parts, Integer> productMinColumn;
     @FXML private TableColumn<Parts, String> productCompanyMachineIDColumn;
     
+    @FXML private TextField partSearchTextField;
+    
     @FXML
      private void exitButtonAction(){
          Stage stage = (Stage) exitButton.getScene().getWindow();
          stage.close();
      }
+    
+     
+    public void searchParts() 
+    {
+        TableColumn<Parts, String> column = partNameColumn;
+    
+        ObservableList<Parts> allParts;
+        allParts = partTableView.getItems();
+
+        List<String> columnData = new ArrayList<>();
+        for (Parts parts : allParts) 
+        {
+            columnData.add(column.getCellObservableValue(parts).getValue());
+        }
+        
+        System.out.println(columnData);
+    }
      
     public void changeScreenAddPart(ActionEvent event) throws IOException 
     {
@@ -85,6 +107,19 @@ public class FXMLDocumentController implements Initializable {
         
         window.setScene(tableViewScene);
         window.show();
+    }
+    
+    public void deletePart() 
+    {
+        ObservableList<Parts> selectedRows, allParts;
+        allParts = partTableView.getItems();
+        
+        selectedRows = partTableView.getSelectionModel().getSelectedItems();
+        
+        for (Parts parts: selectedRows)
+        {
+            allParts.remove(parts);
+        }
     }
     
     public void changeScreenAddProduct(ActionEvent event) throws IOException 
