@@ -53,7 +53,7 @@ public class AddPartScreenController implements Initializable {
     }
     
     public void addPartButton() {
-         Parts newPart = new Parts();
+//         Parts newPart = new Parts();
          
      }
      

@@ -36,6 +36,9 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableColumn<Parts, String> partNameColumn;
     @FXML private TableColumn<Parts, Integer> partInventoryColumn;
     @FXML private TableColumn<Parts, String> partPriceColumn;
+    @FXML private TableColumn<Parts, Integer> partMaxColumn;
+    @FXML private TableColumn<Parts, Integer> partMinColumn;
+    @FXML private TableColumn<Parts, String> companyMachineColumn;
     
     @FXML private TableView<Products> productTableView;
     @FXML private TableColumn<Products, String> productIdColumn;
@@ -56,9 +59,6 @@ public class FXMLDocumentController implements Initializable {
         Parent tableViewParent = loader.load();
         
         Scene tableViewScene = new Scene(tableViewParent);
-        
-        AddPartScreenController controller = loader.getController();
-        controller.initPartData(partTableView.getSelectionModel().getSelectedItem());
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
@@ -106,8 +106,9 @@ public class FXMLDocumentController implements Initializable {
         window.show();
     }
     
-    public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, String partPrice) {
-         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice));
+    public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, 
+                                String partPrice, Integer partMax, Integer partMin, String companyMachineID) {
+         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice, partMax, partMin, companyMachineID));
      } 
     
     @Override
@@ -116,19 +117,25 @@ public class FXMLDocumentController implements Initializable {
         partNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partName"));
         partInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partInventory"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partPrice"));
+        partMaxColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partMax"));
+        partMinColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partMin"));
+        companyMachineColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("companyMachineID"));
+        
         productIdColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productID"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productName"));
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
+        
         partTableView.setItems(getParts());
+        productTableView.setItems(getProducts());
     }    
     
     public ObservableList<Parts> getParts() 
     {
        ObservableList<Parts> parts = FXCollections.observableArrayList();
-       parts.add(new Parts("A1", "Steal Beam", 2, "1.00"));
-       parts.add(new Parts("A2", "ScrewDriver", 5, "3.00"));
-       parts.add(new Parts("A4", "Nuts", 11, "4.00"));
+       parts.add(new Parts("A1", "Steal Beam", 2, "1.00", 2, 1, "Boeing"));
+       parts.add(new Parts("A2", "ScrewDriver", 5, "3.00", 4, 2, "Microsoft"));
+       parts.add(new Parts("A4", "Nuts", 11, "4.00", 6, 1, "Nintendo"));
        return parts;
     }
     
