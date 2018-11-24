@@ -29,7 +29,7 @@
                   <TableColumn fx:id="partPriceColumn" prefWidth="115.0" text="Price/Cost per Unit" />
                   <TableColumn fx:id="partMaxColumn" prefWidth="75.0" text="Max" />
                   <TableColumn fx:id="partMinColumn" prefWidth="75.0" text="Min" />
-                  <TableColumn fx:id="companyMachineColumn" prefWidth="75.0" text="Mach/Comp ID" />
+                  <TableColumn fx:id="partCompanyMachineIDColumn" prefWidth="75.0" text="Mach/Comp ID" />
               </columns>
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">
@@ -58,9 +58,9 @@
                   <TableColumn fx:id="productNameColumn" prefWidth="115.0" text="Product Name" />
                   <TableColumn fx:id="productInventoryColumn" prefWidth="115.0" text="Inventory Level" />
                   <TableColumn fx:id="productPriceColumn" prefWidth="115.0" text="Price Per Unit" />
-                  <TableColumn prefWidth="75.0" text="Max" />
-                  <TableColumn prefWidth="75.0" text="Min" />
-                  <TableColumn prefWidth="75.0" text="Mach/Comp ID" />
+                  <TableColumn fx:id="productMaxColumn" prefWidth="75.0" text="Max" />
+                  <TableColumn fx:id="productMinColumn" prefWidth="75.0" text="Min" />
+                  <TableColumn fx:id="productCompanyMachineIDColumn" prefWidth="75.0" text="Mach/Comp ID" />
                </columns>
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">

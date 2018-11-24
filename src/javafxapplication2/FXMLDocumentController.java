@@ -38,13 +38,16 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableColumn<Parts, String> partPriceColumn;
     @FXML private TableColumn<Parts, Integer> partMaxColumn;
     @FXML private TableColumn<Parts, Integer> partMinColumn;
-    @FXML private TableColumn<Parts, String> companyMachineColumn;
+    @FXML private TableColumn<Parts, String> partCompanyMachineIDColumn;
     
     @FXML private TableView<Products> productTableView;
     @FXML private TableColumn<Products, String> productIdColumn;
     @FXML private TableColumn<Products, String> productNameColumn;
     @FXML private TableColumn<Products, Integer> productInventoryColumn;
     @FXML private TableColumn<Products, String> productPriceColumn;
+    @FXML private TableColumn<Parts, Integer> productMaxColumn;
+    @FXML private TableColumn<Parts, Integer> productMinColumn;
+    @FXML private TableColumn<Parts, String> productCompanyMachineIDColumn;
     
     @FXML
      private void exitButtonAction(){
@@ -107,8 +110,8 @@ public class FXMLDocumentController implements Initializable {
     }
     
     public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, 
-                                String partPrice, Integer partMax, Integer partMin, String companyMachineID) {
-         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice, partMax, partMin, companyMachineID));
+                                String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
+         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice, partMax, partMin, partcompanyMachineID));
      } 
     
     @Override
@@ -119,12 +122,15 @@ public class FXMLDocumentController implements Initializable {
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partPrice"));
         partMaxColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partMax"));
         partMinColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partMin"));
-        companyMachineColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("companyMachineID"));
+        partCompanyMachineIDColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partCompanyMachineID"));
         
         productIdColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productID"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productName"));
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
+        productMaxColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("productMax"));
+        productMinColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("productMin"));
+        productCompanyMachineIDColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productCompanyMachineID"));
         
         partTableView.setItems(getParts());
         productTableView.setItems(getProducts());
@@ -142,10 +148,10 @@ public class FXMLDocumentController implements Initializable {
     public ObservableList<Products> getProducts()
     {
         ObservableList<Products> products = FXCollections.observableArrayList();
-        products.add(new Products("B1", "Diapers", 10, "1.01"));
-        products.add(new Products("B2", "Towels", 2, "2.02"));
-        products.add(new Products("B3", "Napkins", 8, "3.03"));
-        products.add(new Products("B4", "Soap", 12, "4.04"));
+        products.add(new Products("B1", "Diapers", 10, "1.01", 2, 1, "Chevron"));
+        products.add(new Products("B2", "Towels", 2, "2.02", 3, 2, "Texaco"));
+        products.add(new Products("B3", "Napkins", 8, "3.03", 10, 2, "Yay"));
+        products.add(new Products("B4", "Soap", 12, "4.04", 9, 5, "Wonderful"));
         return products;
     }
 }

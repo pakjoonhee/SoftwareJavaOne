@@ -14,16 +14,16 @@ public class Parts {
     private SimpleStringProperty partPrice;
     private SimpleIntegerProperty partMax;
     private SimpleIntegerProperty partMin;
-    private SimpleStringProperty companyMachineID; 
+    private SimpleStringProperty partCompanyMachineID; 
 
-    public Parts(String partID, String partName, Integer partInventory, String partPrice, Integer partMax, Integer partMin, String companyMachineID) {
+    public Parts(String partID, String partName, Integer partInventory, String partPrice, Integer partMax, Integer partMin, String partCompanyMachineID) {
         this.partID = new SimpleStringProperty(partID);
         this.partName = new SimpleStringProperty(partName);
         this.partInventory = new SimpleIntegerProperty(partInventory);
         this.partPrice = new SimpleStringProperty(partPrice);
         this.partMax = new SimpleIntegerProperty(partMax);
         this.partMin = new SimpleIntegerProperty(partMin);
-        this.companyMachineID = new SimpleStringProperty(companyMachineID);
+        this.partCompanyMachineID = new SimpleStringProperty(partCompanyMachineID);
     }
 
     public String getPartID() {
@@ -74,12 +74,12 @@ public class Parts {
         this.partMin = partMin;
     }
 
-    public String getCompanyMachineID() {
-        return companyMachineID.get();
+    public String getPartCompanyMachineID() {
+        return partCompanyMachineID.get();
     }
 
-    public void setCompanyMachineID(SimpleStringProperty companyMachineID) {
-        this.companyMachineID = companyMachineID;
+    public void setPartCompanyMachineID(SimpleStringProperty partCompanyMachineID) {
+        this.partCompanyMachineID = partCompanyMachineID;
     }
     
     

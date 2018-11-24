@@ -85,7 +85,7 @@ public class ModifyPartScreenController implements Initializable {
          partPriceTextField.setText(selectedProduct.getPartPrice());
          partMaxTextField.setText(Integer.toString(selectedProduct.getPartMax()));
          partMinTextField.setText(Integer.toString(selectedProduct.getPartMin()));
-         changeTextField.setText(selectedProduct.getCompanyMachineID());
+         changeTextField.setText(selectedProduct.getPartCompanyMachineID());
          this.rowNumber = rowNumber;
      } 
     

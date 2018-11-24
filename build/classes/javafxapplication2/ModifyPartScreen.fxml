@@ -62,7 +62,7 @@
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="80.0" text="Max" />
-                  <TextField fx:id="maxTextField" prefHeight="25.0" prefWidth="75.0" promptText="Max">
+                  <TextField fx:id="partMaxTextField" prefHeight="25.0" prefWidth="75.0" promptText="Max">
                      <HBox.margin>
                         <Insets right="20.0" />
                      </HBox.margin>
@@ -72,7 +72,7 @@
                         <Insets right="20.0" />
                      </padding>
                   </Label>
-                  <TextField fx:id="minTextField" prefWidth="75.0" promptText="Min" />
+                  <TextField fx:id="partMinTextField" prefWidth="75.0" promptText="Min" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
