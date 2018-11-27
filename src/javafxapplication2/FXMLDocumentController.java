@@ -134,15 +134,25 @@ public class FXMLDocumentController implements Initializable {
         window.show();
     }
     
-    public void getDataCallback(String companyName, Integer rowNumber, String partID, String partName, Integer partInventory, 
-                                String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
+    public void modifyDataCompanyName(String companyName, Integer rowNumber, String partID, String partName, Integer partInventory, 
+                                      String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
          partTableView.getItems().set(rowNumber, new Outsourced(companyName, partID, partName, partInventory, partPrice, partMax, partMin));
-     } 
+    } 
     
-    public void addDataCallback(String partID, String partName, Integer partInventory, 
-                                String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
-         partTableView.getItems().add(new Parts(partID, partName, partInventory, partPrice, partMax, partMin));
-     } 
+    public void modifyDataMachineID(Integer machineID, Integer rowNumber, String partID, String partName, Integer partInventory, 
+                                    String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
+         partTableView.getItems().set(rowNumber, new MachineID(machineID, partID, partName, partInventory, partPrice, partMax, partMin));
+    } 
+    
+    public void addDataCompanyName(String companyName, String partID, String partName, Integer partInventory, 
+                                   String partPrice, Integer partMax, Integer partMin) {
+         partTableView.getItems().add(new Outsourced(companyName, partID, partName, partInventory, partPrice, partMax, partMin));
+    } 
+    
+    public void addDataMachineID(Integer machineID, String partID, String partName, Integer partInventory, 
+                                 String partPrice, Integer partMax, Integer partMin) {
+         partTableView.getItems().add(new MachineID(machineID, partID, partName, partInventory, partPrice, partMax, partMin));
+    } 
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,6 +165,7 @@ public class FXMLDocumentController implements Initializable {
         productNameColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productName"));
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
+        
         
         partTableView.setItems(getParts());
         productTableView.setItems(getProducts());

@@ -18,19 +18,18 @@ import javafx.stage.Stage;
 
 
 public class AddPartScreenController implements Initializable {
-    private Parts selectedPart;
     @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
-    @FXML private TextField changeTextField;
-//    @FXML private TextField partIdTextField;
+    @FXML private TextField partIdTextField;
     @FXML private TextField partNameTextField;
     @FXML private TextField partInventoryTextField;
     @FXML private TextField partPriceTextField;
     @FXML private TextField partMaxTextField;
     @FXML private TextField partMinTextField;
-    @FXML private TextField partCompanyMachineIDTextField;
+    @FXML private TextField companyOrID;
     private ToggleGroup sourceButtonGroup;
+    private String whichToggle;
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
@@ -47,17 +46,17 @@ public class AddPartScreenController implements Initializable {
     {
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) {
             machineIDLabel.setText("Machine ID");
-            changeTextField.setPromptText("Mach ID");
+            companyOrID.setPromptText("Mach ID");
+            whichToggle = "Machine";
         }
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
             machineIDLabel.setText("Company Name");
-            changeTextField.setPromptText("Comp Nm");
+            companyOrID.setPromptText("Comp Nm");
+            whichToggle = "Company";
         }
     }
     
     public void addPartButton(ActionEvent event) throws IOException {
-        
-        
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
         Parent tableViewParent = loader.load();
@@ -65,16 +64,35 @@ public class AddPartScreenController implements Initializable {
         Scene tableViewScene = new Scene(tableViewParent);
         
         FXMLDocumentController controller = loader.getController();
-        controller.addDataCallback("Blah", partNameTextField.getText(), 
-                                  Integer.parseInt(partInventoryTextField.getText()), 
-                                  partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
-                                  Integer.parseInt(partMinTextField.getText()), partCompanyMachineIDTextField.getText());
         
+        if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) 
+        {
+            controller.addDataCompanyName(companyOrID.getText(), 
+                                      "2", 
+                                      partNameTextField.getText(), 
+                                      Integer.parseInt(partInventoryTextField.getText()), 
+                                      partPriceTextField.getText(), 
+                                      Integer.parseInt(partMaxTextField.getText()), 
+                                      Integer.parseInt(partMinTextField.getText()));
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            window.setScene(tableViewScene);
+            window.show();
+        } else if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton))
+        {
+            controller.addDataMachineID(Integer.parseInt(companyOrID.getText()), 
+                                        "2", 
+                                        partNameTextField.getText(), 
+                                        Integer.parseInt(partInventoryTextField.getText()), 
+                                        partPriceTextField.getText(), 
+                                        Integer.parseInt(partMaxTextField.getText()), 
+                                        Integer.parseInt(partMinTextField.getText()));
+            
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
-        window.setScene(tableViewScene);
-        window.show();
+            window.setScene(tableViewScene);
+            window.show();
+        }
          
      }
      

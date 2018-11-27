@@ -17,17 +17,16 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
-    private Parts outsourcedPart;
     @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
-    @FXML private TextField changeTextField;
     @FXML private TextField partNameTextField;
     @FXML private TextField partInventoryTextField;
     @FXML private TextField partPriceTextField;
     @FXML private TextField partMaxTextField;
     @FXML private TextField partMinTextField;
     @FXML private TextField companyOrID;
+    private Parts parts;
     private String partID;
     private Integer rowNumber;
     private ToggleGroup sourceButtonGroup;
@@ -52,13 +51,25 @@ public class ModifyPartScreenController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
         Parent tableViewParent = loader.load();
-        
         Scene tableViewScene = new Scene(tableViewParent);
-        
         FXMLDocumentController controller = loader.getController();
-        controller.getDataCallback("Boeing", rowNumber, partID, partNameTextField.getText(), Integer.parseInt(partInventoryTextField.getText()), 
-                                   partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
-                                   Integer.parseInt(partMinTextField.getText()), companyOrID.getText());
+        
+        if(parts instanceof MachineID) 
+        {
+            controller.modifyDataMachineID(Integer.parseInt(companyOrID.getText()), rowNumber, partID, partNameTextField.getText(), 
+                                           Integer.parseInt(partInventoryTextField.getText()), 
+                                           partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
+                                           Integer.parseInt(partMinTextField.getText()), companyOrID.getText());
+        }
+        
+        if(parts instanceof Outsourced) 
+        {
+            controller.modifyDataCompanyName(companyOrID.getText(), rowNumber, partID, partNameTextField.getText(), 
+                                             Integer.parseInt(partInventoryTextField.getText()), 
+                                             partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
+                                             Integer.parseInt(partMinTextField.getText()), companyOrID.getText());
+        }
+        
                 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
@@ -79,7 +90,7 @@ public class ModifyPartScreenController implements Initializable {
     }
     
     public void initPartData(Parts parts, Integer rowNumber) {
-        
+        this.parts = parts;
         if(parts instanceof MachineID) 
         {
             MachineID machineIDPart = (MachineID)parts;
