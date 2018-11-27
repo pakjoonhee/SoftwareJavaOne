@@ -5,10 +5,8 @@
  */
 package javafxapplication2;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,9 +20,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -138,14 +134,14 @@ public class FXMLDocumentController implements Initializable {
         window.show();
     }
     
-    public void getDataCallback(Integer rowNumber, String partID, String partName, Integer partInventory, 
+    public void getDataCallback(String companyName, Integer rowNumber, String partID, String partName, Integer partInventory, 
                                 String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
-         partTableView.getItems().set(rowNumber, new Parts(partID, partName, partInventory, partPrice, partMax, partMin, partcompanyMachineID));
+         partTableView.getItems().set(rowNumber, new Outsourced(companyName, partID, partName, partInventory, partPrice, partMax, partMin));
      } 
     
     public void addDataCallback(String partID, String partName, Integer partInventory, 
                                 String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
-         partTableView.getItems().add(new Parts(partID, partName, partInventory, partPrice, partMax, partMin, partcompanyMachineID));
+         partTableView.getItems().add(new Parts(partID, partName, partInventory, partPrice, partMax, partMin));
      } 
     
     @Override
@@ -167,9 +163,9 @@ public class FXMLDocumentController implements Initializable {
     public ObservableList<Parts> getParts() 
     {
        ObservableList<Parts> parts = FXCollections.observableArrayList();
-       parts.add(new Parts("A1", "Steal Beam", 2, "1.00", 2, 1, "Boeing"));
-       parts.add(new Parts("A2", "ScrewDriver", 5, "3.00", 4, 2, "Microsoft"));
-       parts.add(new Parts("A4", "Nuts", 11, "4.00", 6, 1, "Nintendo"));
+       parts.add(new Outsourced( "Boeing", "A1", "Steal Beam", 2, "1.00", 2, 1));
+       parts.add(new Outsourced("Microsoft", "A2", "ScrewDriver", 5, "3.00", 4, 2));
+       parts.add(new Outsourced("Nintendo", "A4", "Nuts", 11, "4.00", 6, 1));
        return parts;
     }
     

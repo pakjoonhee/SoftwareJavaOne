@@ -1,14 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxapplication2;
 
-/**
- *
- * @author pakjo
- */
-public class MachineID {
+public class MachineID extends Parts {
+    private Integer machineID;
+    public MachineID(Integer machineID, String partID, String partName, Integer partInventory, String partPrice, Integer partMax, Integer partMin) {
+        super(partID, partName, partInventory, partPrice, partMax, partMin);
+        this.machineID = machineID;
+    }
+
+    public Integer getMachineID() {
+        return machineID;
+    }
+
+    public void setMachineID(Integer machineID) {
+        this.machineID = machineID;
+    }
+    
     
 }

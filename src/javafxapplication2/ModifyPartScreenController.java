@@ -28,6 +28,7 @@ public class ModifyPartScreenController implements Initializable {
     @FXML private TextField partMaxTextField;
     @FXML private TextField partMinTextField;
     private String partID;
+    private String companyName;
     private Integer rowNumber;
     private ToggleGroup sourceButtonGroup;
 
@@ -55,7 +56,7 @@ public class ModifyPartScreenController implements Initializable {
         Scene tableViewScene = new Scene(tableViewParent);
         
         FXMLDocumentController controller = loader.getController();
-        controller.getDataCallback(rowNumber, partID, partNameTextField.getText(), Integer.parseInt(partInventoryTextField.getText()), 
+        controller.getDataCallback("Boeing", rowNumber, partID, partNameTextField.getText(), Integer.parseInt(partInventoryTextField.getText()), 
                                    partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
                                    Integer.parseInt(partMinTextField.getText()), changeTextField.getText());
                 
@@ -78,14 +79,14 @@ public class ModifyPartScreenController implements Initializable {
     }
     
     public void initPartData(Parts parts, Integer rowNumber) {
-         selectedProduct = parts;
+         Outsourced selectedProduct = (Outsourced)parts;
          partID = selectedProduct.getPartID();
          partNameTextField.setText(selectedProduct.getPartName());
          partInventoryTextField.setText(Integer.toString(selectedProduct.getPartInventory()));
          partPriceTextField.setText(selectedProduct.getPartPrice());
          partMaxTextField.setText(Integer.toString(selectedProduct.getPartMax()));
          partMinTextField.setText(Integer.toString(selectedProduct.getPartMin()));
-         changeTextField.setText(selectedProduct.getPartCompanyMachineID());
+         companyName = selectedProduct.getCompanyName();
          this.rowNumber = rowNumber;
      } 
     
