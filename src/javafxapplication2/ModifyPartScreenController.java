@@ -93,6 +93,10 @@ public class ModifyPartScreenController implements Initializable {
         this.parts = parts;
         if(parts instanceof MachineID) 
         {
+            this.inHouseButton.setSelected(true);
+            machineIDLabel.setText("Machine ID");
+            companyOrID.setPromptText("Mach ID");
+
             MachineID machineIDPart = (MachineID)parts;
             partNameTextField.setText(machineIDPart.getPartName());
             partInventoryTextField.setText(Integer.toString(machineIDPart.getPartInventory()));
@@ -104,6 +108,10 @@ public class ModifyPartScreenController implements Initializable {
         
         if(parts instanceof Outsourced) 
         {
+            this.outsourcedButton.setSelected(true);
+            machineIDLabel.setText("Company Name");
+            companyOrID.setPromptText("Comp Nm");
+            
             Outsourced outsourcedPart = (Outsourced)parts;
             partID = outsourcedPart.getPartID();
             partNameTextField.setText(outsourcedPart.getPartName());
@@ -120,7 +128,6 @@ public class ModifyPartScreenController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         sourceButtonGroup = new ToggleGroup();
-        this.inHouseButton.setSelected(true);
         this.inHouseButton.setToggleGroup(sourceButtonGroup);
         this.outsourcedButton.setToggleGroup(sourceButtonGroup);
     }    

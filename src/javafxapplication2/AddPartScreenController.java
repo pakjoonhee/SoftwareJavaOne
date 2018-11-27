@@ -68,7 +68,7 @@ public class AddPartScreenController implements Initializable {
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) 
         {
             controller.addDataCompanyName(companyOrID.getText(), 
-                                      "2", 
+                                      Double.toString(Math.random()), 
                                       partNameTextField.getText(), 
                                       Integer.parseInt(partInventoryTextField.getText()), 
                                       partPriceTextField.getText(), 
@@ -81,7 +81,7 @@ public class AddPartScreenController implements Initializable {
         } else if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton))
         {
             controller.addDataMachineID(Integer.parseInt(companyOrID.getText()), 
-                                        "2", 
+                                        Double.toString(Math.random()), 
                                         partNameTextField.getText(), 
                                         Integer.parseInt(partInventoryTextField.getText()), 
                                         partPriceTextField.getText(), 
