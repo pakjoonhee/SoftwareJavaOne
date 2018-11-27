@@ -5,6 +5,8 @@
  */
 package javafxapplication2;
 
+import javafxapplication2.Models.Parts;
+import javafxapplication2.Models.Products;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -53,18 +55,20 @@ public class FXMLDocumentController implements Initializable {
      
     public void searchParts() 
     {
-        TableColumn<Parts, String> column = partNameColumn;
+        TableColumn<Parts, String> column = partIdColumn;
     
         ObservableList<Parts> allParts;
         allParts = partTableView.getItems();
 
         List<String> columnData = new ArrayList<>();
-        for (Parts parts : allParts) 
-        {
-            columnData.add(column.getCellObservableValue(parts).getValue());
-        }
         
-        System.out.println(columnData);
+        for(int parts = 0; parts < allParts.size(); parts++) 
+        {
+            if(Integer.parseInt(column.getCellObservableValue(parts).getValue()) == Integer.parseInt(partSearchTextField.getText())) 
+            {
+                partTableView.getSelectionModel().select(parts);
+            }
+        }
     }
      
     public void changeScreenAddPart(ActionEvent event) throws IOException 
@@ -169,24 +173,25 @@ public class FXMLDocumentController implements Initializable {
         
         partTableView.setItems(getParts());
         productTableView.setItems(getProducts());
+        
     }    
     
     public ObservableList<Parts> getParts() 
     {
        ObservableList<Parts> parts = FXCollections.observableArrayList();
-       parts.add(new Outsourced( "Boeing", "A1", "Steal Beam", 2, "1.00", 2, 1));
-       parts.add(new Outsourced("Microsoft", "A2", "ScrewDriver", 5, "3.00", 4, 2));
-       parts.add(new MachineID(1990, "A4", "Nuts", 11, "4.00", 6, 1));
+       parts.add(new Outsourced( "Boeing", "1", "Steal Beam", 2, "1.00", 2, 1));
+       parts.add(new Outsourced("Microsoft", "2", "ScrewDriver", 5, "3.00", 4, 2));
+       parts.add(new MachineID(1990, "4", "Nuts", 11, "4.00", 6, 1));
        return parts;
     }
     
     public ObservableList<Products> getProducts()
     {
         ObservableList<Products> products = FXCollections.observableArrayList();
-        products.add(new Products("B1", "Diapers", 10, "1.01", 2, 1, "Chevron"));
-        products.add(new Products("B2", "Towels", 2, "2.02", 3, 2, "Texaco"));
-        products.add(new Products("B3", "Napkins", 8, "3.03", 10, 2, "Yay"));
-        products.add(new Products("B4", "Soap", 12, "4.04", 9, 5, "Wonderful"));
+        products.add(new Products("1", "Diapers", 10, "1.01", 2, 1, "Chevron"));
+        products.add(new Products("2", "Towels", 2, "2.02", 3, 2, "Texaco"));
+        products.add(new Products("3", "Napkins", 8, "3.03", 10, 2, "Yay"));
+        products.add(new Products("4", "Soap", 12, "4.04", 9, 5, "Wonderful"));
         return products;
     }
 }

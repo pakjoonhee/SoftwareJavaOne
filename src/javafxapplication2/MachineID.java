@@ -1,5 +1,7 @@
 package javafxapplication2;
 
+import javafxapplication2.Models.Parts;
+
 public class MachineID extends Parts {
     private Integer machineID;
     

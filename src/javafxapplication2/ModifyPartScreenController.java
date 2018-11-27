@@ -1,5 +1,6 @@
 package javafxapplication2;
 
+import javafxapplication2.Models.Parts;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -98,6 +99,7 @@ public class ModifyPartScreenController implements Initializable {
             companyOrID.setPromptText("Mach ID");
 
             MachineID machineIDPart = (MachineID)parts;
+            partID = machineIDPart.getPartID();
             partNameTextField.setText(machineIDPart.getPartName());
             partInventoryTextField.setText(Integer.toString(machineIDPart.getPartInventory()));
             partPriceTextField.setText(machineIDPart.getPartPrice());

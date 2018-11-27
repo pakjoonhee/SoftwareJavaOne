@@ -1,4 +1,4 @@
-package javafxapplication2;
+package javafxapplication2.Models;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
