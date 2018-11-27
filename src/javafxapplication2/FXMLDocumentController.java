@@ -5,6 +5,9 @@
  */
 package javafxapplication2;
 
+import javafxapplication2.AllParts.ModifyPartScreenController;
+import javafxapplication2.Models.MachineID;
+import javafxapplication2.Models.Outsourced;
 import javafxapplication2.Models.Parts;
 import javafxapplication2.Models.Products;
 import java.io.IOException;
@@ -60,8 +63,6 @@ public class FXMLDocumentController implements Initializable {
         ObservableList<Parts> allParts;
         allParts = partTableView.getItems();
 
-        List<String> columnData = new ArrayList<>();
-        
         for(int parts = 0; parts < allParts.size(); parts++) 
         {
             if(Integer.parseInt(column.getCellObservableValue(parts).getValue()) == Integer.parseInt(partSearchTextField.getText())) 

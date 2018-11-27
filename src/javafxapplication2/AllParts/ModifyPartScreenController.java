@@ -1,5 +1,7 @@
-package javafxapplication2;
+package javafxapplication2.AllParts;
 
+import javafxapplication2.Models.MachineID;
+import javafxapplication2.Models.Outsourced;
 import javafxapplication2.Models.Parts;
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import javafxapplication2.FXMLDocumentController;
 
 public class ModifyPartScreenController implements Initializable {
     @FXML private Label machineIDLabel;

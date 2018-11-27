@@ -1,4 +1,4 @@
-package javafxapplication2;
+package javafxapplication2.AllParts;
 
 import java.io.IOException;
 import java.net.URL;
@@ -15,6 +15,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import javafxapplication2.FXMLDocumentController;
 
 
 public class AddPartScreenController implements Initializable {

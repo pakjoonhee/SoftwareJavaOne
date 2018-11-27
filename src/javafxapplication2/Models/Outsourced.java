@@ -1,4 +1,4 @@
-package javafxapplication2;
+package javafxapplication2.Models;
 
 import javafxapplication2.Models.Parts;
 

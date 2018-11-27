@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package javafxapplication2;
+package javafxapplication2.AllProducts;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +14,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
-public class AddProductScreenController implements Initializable {
+public class ModifyProductScreenController implements Initializable {
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
@@ -34,7 +29,7 @@ public class AddProductScreenController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-      
+    
     }    
     
 }
