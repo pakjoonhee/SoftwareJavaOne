@@ -18,7 +18,7 @@
             <HBox prefHeight="35.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" text="Search" />
-                  <TextField />
+                  <TextField fx:id="partSearchTextField" />
                </children>
             </HBox>
             <TableView fx:id="partTableView" prefHeight="179.0" prefWidth="400.0">
@@ -27,9 +27,6 @@
                 <TableColumn fx:id="partNameColumn" prefWidth="115.0" text="Part Name" />
                   <TableColumn fx:id="partInventoryColumn" prefWidth="115.0" text="Inventory Level" />
                   <TableColumn fx:id="partPriceColumn" prefWidth="115.0" text="Price/Cost per Unit" />
-                  <TableColumn fx:id="partMaxColumn" prefWidth="75.0" text="Max" />
-                  <TableColumn fx:id="partMinColumn" prefWidth="75.0" text="Min" />
-                  <TableColumn fx:id="partCompanyMachineIDColumn" prefWidth="75.0" text="Mach/Comp ID" />
               </columns>
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">
@@ -58,9 +55,6 @@
                   <TableColumn fx:id="productNameColumn" prefWidth="115.0" text="Product Name" />
                   <TableColumn fx:id="productInventoryColumn" prefWidth="115.0" text="Inventory Level" />
                   <TableColumn fx:id="productPriceColumn" prefWidth="115.0" text="Price Per Unit" />
-                  <TableColumn fx:id="productMaxColumn" prefWidth="75.0" text="Max" />
-                  <TableColumn fx:id="productMinColumn" prefWidth="75.0" text="Min" />
-                  <TableColumn fx:id="productCompanyMachineIDColumn" prefWidth="75.0" text="Mach/Comp ID" />
                </columns>
             </TableView>
             <HBox prefHeight="44.0" prefWidth="163.0" spacing="10.0">

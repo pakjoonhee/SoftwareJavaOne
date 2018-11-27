@@ -39,18 +39,12 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableColumn<Parts, String> partNameColumn;
     @FXML private TableColumn<Parts, Integer> partInventoryColumn;
     @FXML private TableColumn<Parts, String> partPriceColumn;
-    @FXML private TableColumn<Parts, Integer> partMaxColumn;
-    @FXML private TableColumn<Parts, Integer> partMinColumn;
-    @FXML private TableColumn<Parts, String> partCompanyMachineIDColumn;
     
     @FXML private TableView<Products> productTableView;
     @FXML private TableColumn<Products, String> productIdColumn;
     @FXML private TableColumn<Products, String> productNameColumn;
     @FXML private TableColumn<Products, Integer> productInventoryColumn;
     @FXML private TableColumn<Products, String> productPriceColumn;
-    @FXML private TableColumn<Parts, Integer> productMaxColumn;
-    @FXML private TableColumn<Parts, Integer> productMinColumn;
-    @FXML private TableColumn<Parts, String> productCompanyMachineIDColumn;
     
     @FXML private TextField partSearchTextField;
     
@@ -160,17 +154,11 @@ public class FXMLDocumentController implements Initializable {
         partNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partName"));
         partInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partInventory"));
         partPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partPrice"));
-        partMaxColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partMax"));
-        partMinColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partMin"));
-        partCompanyMachineIDColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partCompanyMachineID"));
         
         productIdColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productID"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productName"));
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
-        productMaxColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("productMax"));
-        productMinColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("productMin"));
-        productCompanyMachineIDColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productCompanyMachineID"));
         
         partTableView.setItems(getParts());
         productTableView.setItems(getProducts());
