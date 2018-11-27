@@ -17,7 +17,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class ModifyPartScreenController implements Initializable {
-    private Parts selectedProduct;
+    private Parts outsourcedPart;
     @FXML private Label machineIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
@@ -27,8 +27,8 @@ public class ModifyPartScreenController implements Initializable {
     @FXML private TextField partPriceTextField;
     @FXML private TextField partMaxTextField;
     @FXML private TextField partMinTextField;
+    @FXML private TextField companyOrID;
     private String partID;
-    private String companyName;
     private Integer rowNumber;
     private ToggleGroup sourceButtonGroup;
 
@@ -58,7 +58,7 @@ public class ModifyPartScreenController implements Initializable {
         FXMLDocumentController controller = loader.getController();
         controller.getDataCallback("Boeing", rowNumber, partID, partNameTextField.getText(), Integer.parseInt(partInventoryTextField.getText()), 
                                    partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
-                                   Integer.parseInt(partMinTextField.getText()), changeTextField.getText());
+                                   Integer.parseInt(partMinTextField.getText()), companyOrID.getText());
                 
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
@@ -70,24 +70,40 @@ public class ModifyPartScreenController implements Initializable {
     {
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) {
             machineIDLabel.setText("Machine ID");
-            changeTextField.setPromptText("Mach ID");
+            companyOrID.setPromptText("Mach ID");
         }
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
             machineIDLabel.setText("Company Name");
-            changeTextField.setPromptText("Comp Nm");
+            companyOrID.setPromptText("Comp Nm");
         }
     }
     
     public void initPartData(Parts parts, Integer rowNumber) {
-         Outsourced selectedProduct = (Outsourced)parts;
-         partID = selectedProduct.getPartID();
-         partNameTextField.setText(selectedProduct.getPartName());
-         partInventoryTextField.setText(Integer.toString(selectedProduct.getPartInventory()));
-         partPriceTextField.setText(selectedProduct.getPartPrice());
-         partMaxTextField.setText(Integer.toString(selectedProduct.getPartMax()));
-         partMinTextField.setText(Integer.toString(selectedProduct.getPartMin()));
-         companyName = selectedProduct.getCompanyName();
-         this.rowNumber = rowNumber;
+        
+        if(parts instanceof MachineID) 
+        {
+            MachineID machineIDPart = (MachineID)parts;
+            partNameTextField.setText(machineIDPart.getPartName());
+            partInventoryTextField.setText(Integer.toString(machineIDPart.getPartInventory()));
+            partPriceTextField.setText(machineIDPart.getPartPrice());
+            partMaxTextField.setText(Integer.toString(machineIDPart.getPartMax()));
+            partMinTextField.setText(Integer.toString(machineIDPart.getPartMin()));
+            companyOrID.setText(Integer.toString(machineIDPart.getMachineID()));
+        }
+        
+        if(parts instanceof Outsourced) 
+        {
+            Outsourced outsourcedPart = (Outsourced)parts;
+            partID = outsourcedPart.getPartID();
+            partNameTextField.setText(outsourcedPart.getPartName());
+            partInventoryTextField.setText(Integer.toString(outsourcedPart.getPartInventory()));
+            partPriceTextField.setText(outsourcedPart.getPartPrice());
+            partMaxTextField.setText(Integer.toString(outsourcedPart.getPartMax()));
+            partMinTextField.setText(Integer.toString(outsourcedPart.getPartMin()));
+            companyOrID.setText(outsourcedPart.getCompanyName());
+        }
+        
+        this.rowNumber = rowNumber;
      } 
     
     @Override

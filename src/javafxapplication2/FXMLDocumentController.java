@@ -165,7 +165,7 @@ public class FXMLDocumentController implements Initializable {
        ObservableList<Parts> parts = FXCollections.observableArrayList();
        parts.add(new Outsourced( "Boeing", "A1", "Steal Beam", 2, "1.00", 2, 1));
        parts.add(new Outsourced("Microsoft", "A2", "ScrewDriver", 5, "3.00", 4, 2));
-       parts.add(new Outsourced("Nintendo", "A4", "Nuts", 11, "4.00", 6, 1));
+       parts.add(new MachineID(1990, "A4", "Nuts", 11, "4.00", 6, 1));
        return parts;
     }
     
