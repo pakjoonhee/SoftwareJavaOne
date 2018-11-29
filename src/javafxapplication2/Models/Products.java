@@ -2,6 +2,7 @@ package javafxapplication2.Models;
 
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
 
 public class Products {
     private SimpleStringProperty productID, productName;
@@ -10,6 +11,7 @@ public class Products {
     private SimpleIntegerProperty productMax;
     private SimpleIntegerProperty productMin;
     private SimpleStringProperty productCompanyMachineID; 
+    private ObservableList<Parts> parts;
     
     public Products(String productID, String productName, Integer productInventory, String productPrice, Integer productMax, Integer productMin, String productCompanyMachineID) {
         this.productID = new SimpleStringProperty(productID);
@@ -76,6 +78,9 @@ public class Products {
     public void setProductCompanyMachineID(SimpleStringProperty productCompanyMachineID) {
         this.productCompanyMachineID = productCompanyMachineID;
     }
-    
+
+    public ObservableList<Parts> getParts() {
+        return parts;
+    }
     
 }

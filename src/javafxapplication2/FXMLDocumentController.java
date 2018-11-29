@@ -75,7 +75,7 @@ public class FXMLDocumentController implements Initializable {
     public void changeScreenAddPart(ActionEvent event) throws IOException 
     {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("AddPartScreen.fxml"));
+        loader.setLocation(getClass().getResource("/javafxapplication2/AllParts/AddPartScreen.fxml"));
         Parent tableViewParent = loader.load();
         
         Scene tableViewScene = new Scene(tableViewParent);
@@ -89,7 +89,7 @@ public class FXMLDocumentController implements Initializable {
     public void changeScreenModifyPart(ActionEvent event) throws IOException 
     {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("ModifyPartScreen.fxml"));
+        loader.setLocation(getClass().getResource("/javafxapplication2/AllParts/ModifyPartScreen.fxml"));
         Parent tableViewParent = loader.load();
         
         Scene tableViewScene = new Scene(tableViewParent);
@@ -119,7 +119,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenAddProduct(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("AddProductScreen.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/AllProducts/AddProductScreen.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -130,7 +130,7 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyProduct(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("ModifyProductScreen.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/AllProducts/ModifyProductScreen.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();

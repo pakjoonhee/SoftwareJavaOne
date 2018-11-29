@@ -34,7 +34,7 @@ public class AddPartScreenController implements Initializable {
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
         Scene tableViewScene = new Scene(tableViewParent);
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -59,7 +59,7 @@ public class AddPartScreenController implements Initializable {
     
     public void addPartButton(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
         Parent tableViewParent = loader.load();
         
         Scene tableViewScene = new Scene(tableViewParent);

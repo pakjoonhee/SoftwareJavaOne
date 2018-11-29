@@ -39,7 +39,7 @@ public class ModifyPartScreenController implements Initializable {
     public void cancelButtonGoBack(ActionEvent event) throws IOException 
     {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
         Parent tableViewParent = loader.load();
         
         Scene tableViewScene = new Scene(tableViewParent);
@@ -53,7 +53,7 @@ public class ModifyPartScreenController implements Initializable {
     public void submitButtonGoBack(ActionEvent event) throws IOException 
     {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
         Parent tableViewParent = loader.load();
         Scene tableViewScene = new Scene(tableViewParent);
         FXMLDocumentController controller = loader.getController();
@@ -109,6 +109,7 @@ public class ModifyPartScreenController implements Initializable {
             partMaxTextField.setText(Integer.toString(machineIDPart.getPartMax()));
             partMinTextField.setText(Integer.toString(machineIDPart.getPartMin()));
             companyOrID.setText(Integer.toString(machineIDPart.getMachineID()));
+            
         }
         
         if(parts instanceof Outsourced) 
