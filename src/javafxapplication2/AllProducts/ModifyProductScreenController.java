@@ -42,8 +42,9 @@ public class ModifyProductScreenController implements Initializable {
     @FXML private TableColumn<Parts, Integer> deletePartInventoryColumn;
     @FXML private TableColumn<Parts, String> deletePartPriceColumn;
     @FXML private TextField searchTextField;
-    public static ObservableList<Parts> associatedParts = FXCollections.observableArrayList();
     private ObservableList<Parts> addAssociatedParts = FXCollections.observableArrayList();
+    private ObservableList<Parts> associatedParts = FXCollections.observableArrayList();
+    
     private String productID;
     private Integer rowNumber;
     
@@ -54,12 +55,12 @@ public class ModifyProductScreenController implements Initializable {
         
         if (alert.getResult() == ButtonType.YES) {
             Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-            Scene tableViewScene = new Scene(tableViewParent);
-
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-            window.setScene(tableViewScene);
-            window.show();
+        Scene tableViewScene = new Scene(tableViewParent);
+        
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        
+        window.setScene(tableViewScene);
+        window.show();
         }
     }
     
@@ -81,10 +82,9 @@ public class ModifyProductScreenController implements Initializable {
 
             Products updateProduct = new Products(productID, productNameTextField.getText(), 
                                                   Integer.parseInt(productInventoryTextField.getText()), 
-                                                  Utility.formatPrice(productPriceTextField.getText()), 
+                                                  productPriceTextField.getText(), 
                                                   Integer.parseInt(productMaxTextField.getText()), 
-                                                  Integer.parseInt(productMinTextField.getText()), 
-                                                  associatedParts);
+                                                  Integer.parseInt(productMinTextField.getText()), associatedParts);
 
             updateProduct(rowNumber, updateProduct);
 
@@ -121,10 +121,10 @@ public class ModifyProductScreenController implements Initializable {
     
     public void addPartButton() {
         if(addTableView.getSelectionModel().getSelectedItem() != null) {
-            Parts product = (Parts) addTableView.getSelectionModel().getSelectedItem();
-            associatedParts.add(product);
+            Parts part = (Parts) addTableView.getSelectionModel().getSelectedItem();
+            associatedParts.add(part);
             deleteTableView.setItems(associatedParts);
-            addAssociatedParts.remove(product);
+            addAssociatedParts.remove(part);
         }
     }
     
@@ -134,10 +134,10 @@ public class ModifyProductScreenController implements Initializable {
         
         if (alert.getResult() == ButtonType.YES) {
             if(deleteTableView.getSelectionModel().getSelectedItem() != null) {
-                Parts product = (Parts) deleteTableView.getSelectionModel().getSelectedItem();
-                addAssociatedParts.add(product);
+                Parts part = (Parts) deleteTableView.getSelectionModel().getSelectedItem();
+                addAssociatedParts.add(part);
                 addTableView.setItems(addAssociatedParts);
-                associatedParts.remove(product);
+                associatedParts.remove(part);
             }
         }
     }
@@ -160,19 +160,19 @@ public class ModifyProductScreenController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        addPartIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productID"));
-        addPartNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productName"));
-        addPartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("productInventory"));
-        addPartPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productPrice"));
+        addPartIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partID"));
+        addPartNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partName"));
+        addPartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partInventory"));
+        addPartPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partPrice"));
         
-        deletePartIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productID"));
-        deletePartNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productName"));
-        deletePartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("productInventory"));
-        deletePartPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("productPrice"));
+        deletePartIdColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partID"));
+        deletePartNameColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partName"));
+        deletePartInventoryColumn.setCellValueFactory(new PropertyValueFactory<Parts, Integer>("partInventory"));
+        deletePartPriceColumn.setCellValueFactory(new PropertyValueFactory<Parts, String>("partPrice"));
         
         Utility.addListener(productInventoryTextField);
         Utility.addListener(productMinTextField);
         Utility.addListener(productMaxTextField);
-        
     }    
+    
 }
