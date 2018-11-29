@@ -27,7 +27,7 @@ public class Utility {
         });
     }
     
-    public static void minTooHigh(String title, String message) {
+    public static void showError(String title, String message) {
         Stage window = new Stage();
         
         window.initModality(Modality.APPLICATION_MODAL);

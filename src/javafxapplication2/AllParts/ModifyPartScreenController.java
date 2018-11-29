@@ -62,10 +62,10 @@ public class ModifyPartScreenController implements Initializable {
     {
         if(Integer.parseInt(partMinTextField.getText()) > Integer.parseInt(partMaxTextField.getText())) 
         {
-            Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+            Utility.showError("ERROR!", "The Minimum cannot be more than the maximum!");
         }
         else if(!Utility.checkDouble(Utility.formatPrice(partPriceTextField.getText()))) {
-            Utility.minTooHigh("ERROR!", "Enter a valid Price!");
+            Utility.showError("ERROR!", "Enter a valid Price!");
         }
         else 
         {
@@ -90,7 +90,7 @@ public class ModifyPartScreenController implements Initializable {
                     window.setScene(tableViewScene);
                     window.show();
                 } else {
-                    Utility.minTooHigh("Error!", "Enter a Number for MachineID!");
+                    Utility.showError("Error!", "Enter a Number for MachineID!");
                 }
                 
             }
@@ -143,7 +143,7 @@ public class ModifyPartScreenController implements Initializable {
                     window.setScene(tableViewScene);
                     window.show();
                 } else {
-                    Utility.minTooHigh("Error!", "Enter a Number for MachineID!");
+                    Utility.showError("Error!", "Enter a Number for MachineID!");
                 }
             }
         }

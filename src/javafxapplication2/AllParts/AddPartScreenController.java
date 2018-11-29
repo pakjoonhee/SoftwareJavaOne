@@ -85,10 +85,10 @@ public class AddPartScreenController implements Initializable {
     public void addPartButton(ActionEvent event) throws IOException {
         
         if(!Utility.checkMinHigher(partMinTextField.getText(), partMaxTextField.getText())) {
-            Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+            Utility.showError("ERROR!", "The Minimum cannot be more than the maximum!");
         }
         else if(!Utility.checkDouble(partPriceTextField.getText())) {
-            Utility.minTooHigh("ERROR!", "Enter a valid Price!");
+            Utility.showError("ERROR!", "Enter a valid Price!");
         }
         else 
         {
@@ -142,7 +142,7 @@ public class AddPartScreenController implements Initializable {
                     window.setScene(tableViewScene);
                     window.show();
                 } else {
-                    Utility.minTooHigh("ERROR!", "Enter a number for MachineID!");
+                    Utility.showError("ERROR!", "Enter a number for MachineID!");
                 }
             }
         }

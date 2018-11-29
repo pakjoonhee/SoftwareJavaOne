@@ -68,10 +68,13 @@ public class ModifyProductScreenController implements Initializable {
     {
         if(Integer.parseInt(productMinTextField.getText()) > Integer.parseInt(productMaxTextField.getText())) 
         {
-            Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+            Utility.showError("ERROR!", "The Minimum cannot be more than the maximum!");
         }
         else if(!Utility.checkDouble(productPriceTextField.getText())) {
-            Utility.minTooHigh("ERROR!", "Enter a valid Price!");
+            Utility.showError("ERROR!", "Enter a valid Price!");
+        }
+        else if(associatedParts.isEmpty()) {
+            Utility.showError("ERROR!", "Need at least one Associated Part!");
         }
         else 
         {
