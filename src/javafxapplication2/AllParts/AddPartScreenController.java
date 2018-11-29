@@ -2,6 +2,7 @@ package javafxapplication2.AllParts;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,15 +17,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafxapplication2.FXMLDocumentController;
+import javafxapplication2.Models.AlertBox;
 import static javafxapplication2.Models.Inventory.addCompanyPart;
 import javafxapplication2.Models.InHouse;
+import static javafxapplication2.Models.Inventory.allParts;
 import javafxapplication2.Models.Outsourced;
 
 public class AddPartScreenController implements Initializable {
     @FXML private Label inHouseIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
-    @FXML private TextField partIdTextField;
     @FXML private TextField partNameTextField;
     @FXML private TextField partInventoryTextField;
     @FXML private TextField partPriceTextField;
@@ -32,7 +34,6 @@ public class AddPartScreenController implements Initializable {
     @FXML private TextField partMinTextField;
     @FXML private TextField companyOrID;
     private ToggleGroup sourceButtonGroup;
-    private String whichToggle;
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
@@ -50,56 +51,82 @@ public class AddPartScreenController implements Initializable {
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) {
             inHouseIDLabel.setText("Machine ID");
             companyOrID.setPromptText("Mach ID");
-            whichToggle = "Machine";
         }
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
             inHouseIDLabel.setText("Company Name");
             companyOrID.setPromptText("Comp Nm");
-            whichToggle = "Company";
         }
     }
     
+    public Integer getRandomNumber() {
+        Random generator=new Random();
+            int randomNum = generator.nextInt(100);
+            for(int i = 0; i < allParts.size(); i++) {
+                if(allParts.get(i).getPartID() == Integer.toString(randomNum)) {
+                    randomNum = generator.nextInt(1000);
+                }
+            }
+        return randomNum;
+    }
+    
     public void addPartButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-        Parent tableViewParent = loader.load();
         
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        FXMLDocumentController controller = loader.getController();
-        
-        if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) 
+        if(Integer.parseInt(partMinTextField.getText()) > Integer.parseInt(partMaxTextField.getText())) 
         {
-            Outsourced newPart = new Outsourced(companyOrID.getText(), 
-                                                Double.toString(Math.random()), 
-                                                partNameTextField.getText(), 
-                                                Integer.parseInt(partInventoryTextField.getText()), 
-                                                partPriceTextField.getText(), 
-                                                Integer.parseInt(partMaxTextField.getText()), 
-                                                Integer.parseInt(partMinTextField.getText()));
-            
-            addCompanyPart(newPart);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            AlertBox.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+        }
         
-            window.setScene(tableViewScene);
-            window.show();
-        } else if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton))
+        else 
         {
-            InHouse newPart = new InHouse(Integer.parseInt(companyOrID.getText()), 
-                                              Double.toString(Math.random()), 
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
+            Parent tableViewParent = loader.load();
+
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            FXMLDocumentController controller = loader.getController();
+
+            if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) 
+            {
+                Random generator=new Random();
+                int randomNum = generator.nextInt(100);
+                for(int i = 0; i < allParts.size(); i++) {
+                    if(allParts.get(i).getPartID() == Integer.toString(randomNum)) {
+                        randomNum = generator.nextInt(1000);
+                    }
+                }
+
+                Outsourced newPart = new Outsourced(companyOrID.getText(), 
+                                                    Integer.toString(getRandomNumber()), 
+                                                    partNameTextField.getText(), 
+                                                    Integer.parseInt(partInventoryTextField.getText()), 
+                                                    partPriceTextField.getText(), 
+                                                    Integer.parseInt(partMaxTextField.getText()), 
+                                                    Integer.parseInt(partMinTextField.getText()));
+
+                addCompanyPart(newPart);
+
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                window.setScene(tableViewScene);
+                window.show();
+            } else if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton))
+            {
+                InHouse newPart = new InHouse(Integer.parseInt(companyOrID.getText()), 
+                                              Integer.toString(getRandomNumber()), 
                                               partNameTextField.getText(), 
                                               Integer.parseInt(partInventoryTextField.getText()), 
                                               partPriceTextField.getText(), 
                                               Integer.parseInt(partMaxTextField.getText()), 
                                               Integer.parseInt(partMinTextField.getText()));
-            
-            addCompanyPart(newPart);
-            
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-            window.setScene(tableViewScene);
-            window.show();
+
+                addCompanyPart(newPart);
+
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                window.setScene(tableViewScene);
+                window.show();
+            }
         }
      }
      

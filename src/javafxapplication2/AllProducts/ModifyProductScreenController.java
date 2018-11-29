@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafxapplication2.Models.AlertBox;
 import static javafxapplication2.Models.Inventory.allParts;
 import static javafxapplication2.Models.Inventory.updateProduct;
 import javafxapplication2.Models.Parts;
@@ -59,23 +60,30 @@ public class ModifyProductScreenController implements Initializable {
     
     public void submitButtonGoBack(ActionEvent event) throws IOException 
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-        Parent tableViewParent = loader.load();
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        Products updateProduct = new Products(productID, productNameTextField.getText(), 
-                                              Integer.parseInt(productInventoryTextField.getText()), 
-                                              productPriceTextField.getText(), 
-                                              Integer.parseInt(productMaxTextField.getText()), 
-                                              Integer.parseInt(productMinTextField.getText()));
+        if(Integer.parseInt(productMinTextField.getText()) > Integer.parseInt(productMaxTextField.getText())) 
+        {
+            AlertBox.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+        }
+        else 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
+            Parent tableViewParent = loader.load();
+            Scene tableViewScene = new Scene(tableViewParent);
 
-        updateProduct(rowNumber, updateProduct);
+            Products updateProduct = new Products(productID, productNameTextField.getText(), 
+                                                  Integer.parseInt(productInventoryTextField.getText()), 
+                                                  productPriceTextField.getText(), 
+                                                  Integer.parseInt(productMaxTextField.getText()), 
+                                                  Integer.parseInt(productMinTextField.getText()));
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
+            updateProduct(rowNumber, updateProduct);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
+        }
     }
     
     public void initProductData(Products product, Integer rowNumber) {

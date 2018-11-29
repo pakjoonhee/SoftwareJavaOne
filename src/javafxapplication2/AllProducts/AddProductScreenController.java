@@ -2,6 +2,7 @@ package javafxapplication2.AllProducts;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafxapplication2.FXMLDocumentController;
+import javafxapplication2.Models.AlertBox;
 import static javafxapplication2.Models.Inventory.addProduct;
 import static javafxapplication2.Models.Inventory.allParts;
 import javafxapplication2.Models.Parts;
@@ -55,23 +56,30 @@ public class AddProductScreenController implements Initializable {
     }
     
     public void addProductButton(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-        Parent tableViewParent = loader.load();
-        Scene tableViewScene = new Scene(tableViewParent);
-        Products newProduct = new Products(Double.toString(Math.random()), 
-                                           productNameTextField.getText(), 
-                                           Integer.parseInt(productInventoryTextField.getText()), 
-                                           productPriceTextField.getText(), 
-                                           Integer.parseInt(productMaxTextField.getText()), 
-                                           Integer.parseInt(productMinTextField.getText()));
+        if(Integer.parseInt(productMinTextField.getText()) > Integer.parseInt(productMaxTextField.getText())) 
+        {
+            AlertBox.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+        }
+        else 
+        {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
+            Parent tableViewParent = loader.load();
+            Scene tableViewScene = new Scene(tableViewParent);
+            Products newProduct = new Products( Integer.toString(getRandomNumber()), 
+                                                productNameTextField.getText(), 
+                                                Integer.parseInt(productInventoryTextField.getText()), 
+                                                productPriceTextField.getText(), 
+                                                Integer.parseInt(productMaxTextField.getText()), 
+                                                Integer.parseInt(productMinTextField.getText()));
 
-        addProduct(newProduct);
+            addProduct(newProduct);
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-        window.setScene(tableViewScene);
-        window.show();
+            window.setScene(tableViewScene);
+            window.show();
+        }
     }
     
     public void addPartButton() {
@@ -106,6 +114,17 @@ public class AddProductScreenController implements Initializable {
                 addTableView.getSelectionModel().select(addParts);
             }
         }
+    }
+    
+    public Integer getRandomNumber() {
+        Random generator=new Random();
+            int randomNum = generator.nextInt(100);
+            for(int i = 0; i < allParts.size(); i++) {
+                if(allParts.get(i).getPartID() == Integer.toString(randomNum)) {
+                    randomNum = generator.nextInt(1000);
+                }
+            }
+        return randomNum;
     }
     
     @Override

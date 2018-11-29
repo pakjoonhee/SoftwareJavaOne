@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafxapplication2.FXMLDocumentController;
+import javafxapplication2.Models.AlertBox;
 import static javafxapplication2.Models.Inventory.updatePart;
 
 public class ModifyPartScreenController implements Initializable {
@@ -53,38 +54,45 @@ public class ModifyPartScreenController implements Initializable {
     
     public void submitButtonGoBack(ActionEvent event) throws IOException 
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-        Parent tableViewParent = loader.load();
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        if(parts instanceof InHouse) 
+        if(Integer.parseInt(partMinTextField.getText()) > Integer.parseInt(partMaxTextField.getText())) 
         {
-            InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
-                                             Integer.parseInt(partInventoryTextField.getText()), 
-                                             partPriceTextField.getText(), 
-                                             Integer.parseInt(partMaxTextField.getText()), 
-                                             Integer.parseInt(partMinTextField.getText()));
-            
-            updatePart(rowNumber, updatePart);
+            AlertBox.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
         }
-        
-        if(parts instanceof Outsourced) 
+        else 
         {
-            Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
-                                                   Integer.parseInt(partInventoryTextField.getText()), 
-                                                   partPriceTextField.getText(), 
-                                                   Integer.parseInt(partMaxTextField.getText()), 
-                                                   Integer.parseInt(partMinTextField.getText()));
-            
-            updatePart(rowNumber, updatePart);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
+            Parent tableViewParent = loader.load();
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            if(parts instanceof InHouse) 
+            {
+                InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
+                                                 Integer.parseInt(partInventoryTextField.getText()), 
+                                                 partPriceTextField.getText(), 
+                                                 Integer.parseInt(partMaxTextField.getText()), 
+                                                 Integer.parseInt(partMinTextField.getText()));
+
+                updatePart(rowNumber, updatePart);
+            }
+
+            if(parts instanceof Outsourced) 
+            {
+                Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
+                                                       Integer.parseInt(partInventoryTextField.getText()), 
+                                                       partPriceTextField.getText(), 
+                                                       Integer.parseInt(partMaxTextField.getText()), 
+                                                       Integer.parseInt(partMinTextField.getText()));
+
+                updatePart(rowNumber, updatePart);
+            }
+
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
         }
-        
-                
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
     }
     
     public void radioButtonToggled() 
