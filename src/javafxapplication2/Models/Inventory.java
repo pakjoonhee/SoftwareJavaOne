@@ -1,29 +1,15 @@
 package javafxapplication2.Models;
     
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Inventory {
-    public static ArrayList<Parts> allParts = new ArrayList<Parts>();
-    public static ArrayList<Products> allProducts = new ArrayList<Products>();
+    public static ObservableList<Parts> allParts;
+    public static ObservableList<Products> allProducts;
     
-    public static void addProduct(Products product) {
-        
-    }
-    
-    public static boolean removeProduct(Integer integer) {
-        return false;
-    }
-    
-//    public static Products lookupProduct(Integer integer) {
-//        
-//    }
-    
-    public static void updateProduct(Integer integer) {
-        
-    }
-    
-    public static void addPart(Parts part) {
-        
+    public static void addCompanyPart(Parts part) {
+        allParts.add(part);
     }
     
     public static boolean deletePart(Parts part) {
@@ -35,6 +21,22 @@ public class Inventory {
 //    }
     
     public static void updatePart(Integer integer) {
+        
+    }
+    
+    public static void addProduct(Products product) {
+        allProducts.add(product);
+    }
+    
+    public static boolean removeProduct(Integer integer) {
+        return false;
+    }
+    
+//    public static Products lookupProduct(Integer integer) {
+//        
+//    }
+    
+    public static void updateProduct(Integer integer) {
         
     }
         

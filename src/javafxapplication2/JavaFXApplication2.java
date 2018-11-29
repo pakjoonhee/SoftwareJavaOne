@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javafxapplication2;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import static javafxapplication2.Models.Inventory.allParts;
 import javafxapplication2.Models.MachineID;
 import javafxapplication2.Models.Outsourced;
-import javafxapplication2.Models.Parts;
 
 /**
  *
@@ -34,9 +30,12 @@ public class JavaFXApplication2 extends Application {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Parts part = new Outsourced( "Boeing", "1", "Steal Beam", 2, "1.00", 2, 1);
-        Parts part1 = new Outsourced("Microsoft", "2", "ScrewDriver", 5, "3.00", 4, 2);
-        Parts part2 = new MachineID(1990, "4", "Nuts", 11, "4.00", 6, 1);
+        allParts = FXCollections.observableArrayList();
+        allParts.add(new Outsourced( "Boeing", "1", "Steal Beam", 2, "1.00", 2, 1));
+        allParts.add(new Outsourced("Microsoft", "2", "ScrewDriver", 5, "3.00", 4, 2));
+        allParts.add(new MachineID(1990, "4", "Nuts", 11, "4.00", 6, 1));
+        
+        
         launch(args);
     }
     

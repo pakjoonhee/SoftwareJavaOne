@@ -16,6 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafxapplication2.FXMLDocumentController;
+import static javafxapplication2.Models.Inventory.addCompanyPart;
+import javafxapplication2.Models.MachineID;
+import javafxapplication2.Models.Outsourced;
+import javafxapplication2.Models.Parts;
 
 
 public class AddPartScreenController implements Initializable {
@@ -68,26 +72,39 @@ public class AddPartScreenController implements Initializable {
         
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) 
         {
-            controller.addDataCompanyName(companyOrID.getText(), 
-                                      Double.toString(Math.random()), 
-                                      partNameTextField.getText(), 
-                                      Integer.parseInt(partInventoryTextField.getText()), 
-                                      partPriceTextField.getText(), 
-                                      Integer.parseInt(partMaxTextField.getText()), 
-                                      Integer.parseInt(partMinTextField.getText()));
+//            controller.addDataCompanyName(companyOrID.getText(), 
+//                                      Double.toString(Math.random()), 
+//                                      partNameTextField.getText(), 
+//                                      Integer.parseInt(partInventoryTextField.getText()), 
+//                                      partPriceTextField.getText(), 
+//                                      Integer.parseInt(partMaxTextField.getText()), 
+//                                      Integer.parseInt(partMinTextField.getText()));.
+            
+            Outsourced newPart = new Outsourced(companyOrID.getText(), 
+                                                Double.toString(Math.random()), 
+                                                partNameTextField.getText(), 
+                                                Integer.parseInt(partInventoryTextField.getText()), 
+                                                partPriceTextField.getText(), 
+                                                Integer.parseInt(partMaxTextField.getText()), 
+                                                Integer.parseInt(partMinTextField.getText()));
+            
+            addCompanyPart(newPart);
+            
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
             window.setScene(tableViewScene);
             window.show();
         } else if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton))
         {
-            controller.addDataMachineID(Integer.parseInt(companyOrID.getText()), 
-                                        Double.toString(Math.random()), 
-                                        partNameTextField.getText(), 
-                                        Integer.parseInt(partInventoryTextField.getText()), 
-                                        partPriceTextField.getText(), 
-                                        Integer.parseInt(partMaxTextField.getText()), 
-                                        Integer.parseInt(partMinTextField.getText()));
+            MachineID newPart = new MachineID(Integer.parseInt(companyOrID.getText()), 
+                                              Double.toString(Math.random()), 
+                                              partNameTextField.getText(), 
+                                              Integer.parseInt(partInventoryTextField.getText()), 
+                                              partPriceTextField.getText(), 
+                                              Integer.parseInt(partMaxTextField.getText()), 
+                                              Integer.parseInt(partMinTextField.getText()));
+            
+            addCompanyPart(newPart);
             
             Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         

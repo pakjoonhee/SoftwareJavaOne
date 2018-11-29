@@ -30,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import static javafxapplication2.Models.Inventory.allParts;
 
 
 public class FXMLDocumentController implements Initializable {
@@ -172,20 +173,12 @@ public class FXMLDocumentController implements Initializable {
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
         
         
-        partTableView.setItems(getParts());
+        partTableView.setItems(allParts);
         productTableView.setItems(getProducts());
         
     }    
     
-    public ObservableList<Parts> getParts() 
-    {
-       ObservableList<Parts> parts = FXCollections.observableArrayList();
-       parts.add(new Outsourced( "Boeing", "1", "Steal Beam", 2, "1.00", 2, 1));
-       parts.add(new Outsourced("Microsoft", "2", "ScrewDriver", 5, "3.00", 4, 2));
-       parts.add(new MachineID(1990, "4", "Nuts", 11, "4.00", 6, 1));
-       return parts;
-    }
-    
+      
     public ObservableList<Products> getProducts()
     {
         ObservableList<Products> products = FXCollections.observableArrayList();
