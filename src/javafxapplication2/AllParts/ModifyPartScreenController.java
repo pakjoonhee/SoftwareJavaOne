@@ -13,19 +13,20 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
-import javafxapplication2.FXMLDocumentController;
-import javafxapplication2.Models.AlertBox;
+import javafxapplication2.Models.Utility;
 import static javafxapplication2.Models.Inventory.updatePart;
 
 public class ModifyPartScreenController implements Initializable {
     @FXML private Label inHouseIDLabel;
     @FXML private RadioButton inHouseButton;
-    @FXML private RadioButton outsourcedButton;
+    @FXML private RadioButton outSourcedButton;
     @FXML private TextField partNameTextField;
     @FXML private TextField partInventoryTextField;
     @FXML private TextField partPriceTextField;
@@ -40,23 +41,28 @@ public class ModifyPartScreenController implements Initializable {
     
     public void cancelButtonGoBack(ActionEvent event) throws IOException 
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-        Parent tableViewParent = loader.load();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to go back?", ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
         
-        Scene tableViewScene = new Scene(tableViewParent);
-                
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
+        if (alert.getResult() == ButtonType.YES) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
+            Parent tableViewParent = loader.load();
+
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
+        }
     }
     
     public void submitButtonGoBack(ActionEvent event) throws IOException 
     {
         if(Integer.parseInt(partMinTextField.getText()) > Integer.parseInt(partMaxTextField.getText())) 
         {
-            AlertBox.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+            Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
         }
         else 
         {
@@ -65,18 +71,28 @@ public class ModifyPartScreenController implements Initializable {
             Parent tableViewParent = loader.load();
             Scene tableViewScene = new Scene(tableViewParent);
 
-            if(parts instanceof InHouse) 
+            if(parts instanceof InHouse && this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) 
             {
-                InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
+                if(companyOrID.getText().matches("-?\\d+")) {
+                    InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
                                                  Integer.parseInt(partInventoryTextField.getText()), 
                                                  partPriceTextField.getText(), 
                                                  Integer.parseInt(partMaxTextField.getText()), 
                                                  Integer.parseInt(partMinTextField.getText()));
 
-                updatePart(rowNumber, updatePart);
-            }
+                    updatePart(rowNumber, updatePart);
+                    
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-            if(parts instanceof Outsourced) 
+                    window.setScene(tableViewScene);
+                    window.show();
+                } else {
+                    Utility.minTooHigh("Error!", "Enter a Number for MachineID!");
+                }
+                
+            }
+            
+            if(parts instanceof InHouse && this.sourceButtonGroup.getSelectedToggle().equals(this.outSourcedButton)) 
             {
                 Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
                                                        Integer.parseInt(partInventoryTextField.getText()), 
@@ -85,13 +101,49 @@ public class ModifyPartScreenController implements Initializable {
                                                        Integer.parseInt(partMinTextField.getText()));
 
                 updatePart(rowNumber, updatePart);
+                
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                window.setScene(tableViewScene);
+                window.show();
             }
 
+            if(parts instanceof Outsourced && this.sourceButtonGroup.getSelectedToggle().equals(this.outSourcedButton)) 
+            {
+                Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
+                                                       Integer.parseInt(partInventoryTextField.getText()), 
+                                                       partPriceTextField.getText(), 
+                                                       Integer.parseInt(partMaxTextField.getText()), 
+                                                       Integer.parseInt(partMinTextField.getText()));
 
-            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                updatePart(rowNumber, updatePart);
+                
+                Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 
-            window.setScene(tableViewScene);
-            window.show();
+                window.setScene(tableViewScene);
+                window.show();
+            }
+            
+            if(parts instanceof Outsourced && this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) 
+            {
+                if(companyOrID.getText().matches("-?\\d+")) {
+                    InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
+                                                 Integer.parseInt(partInventoryTextField.getText()), 
+                                                 partPriceTextField.getText(), 
+                                                 Integer.parseInt(partMaxTextField.getText()), 
+                                                 Integer.parseInt(partMinTextField.getText()));
+
+                    updatePart(rowNumber, updatePart);
+                    
+                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+                    window.setScene(tableViewScene);
+                    window.show();
+                } else {
+                    Utility.minTooHigh("Error!", "Enter a Number for MachineID!");
+                }
+            }
+
         }
     }
     
@@ -101,7 +153,7 @@ public class ModifyPartScreenController implements Initializable {
             inHouseIDLabel.setText("Machine ID");
             companyOrID.setPromptText("Mach ID");
         }
-        if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
+        if(this.sourceButtonGroup.getSelectedToggle().equals(this.outSourcedButton)) {
             inHouseIDLabel.setText("Company Name");
             companyOrID.setPromptText("Comp Nm");
         }
@@ -128,7 +180,7 @@ public class ModifyPartScreenController implements Initializable {
         
         if(parts instanceof Outsourced) 
         {
-            this.outsourcedButton.setSelected(true);
+            this.outSourcedButton.setSelected(true);
             inHouseIDLabel.setText("Company Name");
             companyOrID.setPromptText("Comp Nm");
             
@@ -149,7 +201,12 @@ public class ModifyPartScreenController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         sourceButtonGroup = new ToggleGroup();
         this.inHouseButton.setToggleGroup(sourceButtonGroup);
-        this.outsourcedButton.setToggleGroup(sourceButtonGroup);
+        this.outSourcedButton.setToggleGroup(sourceButtonGroup);
+        
+        Utility.addListener(partPriceTextField);
+        Utility.addListener(partInventoryTextField);
+        Utility.addListener(partMinTextField);
+        Utility.addListener(partMaxTextField);
     }    
     
 }

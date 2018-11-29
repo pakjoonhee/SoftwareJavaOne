@@ -11,7 +11,6 @@ import javafxapplication2.Models.Products;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +19,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -103,32 +105,39 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyPart(ActionEvent event) throws IOException 
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/AllParts/ModifyPartScreen.fxml"));
-        Parent tableViewParent = loader.load();
-        
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        ModifyPartScreenController controller = loader.getController();
-        controller.initPartData(partTableView.getSelectionModel().getSelectedItem(), 
-                partTableView.getSelectionModel().selectedIndexProperty().get());
-                        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
+        if(partTableView.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/AllParts/ModifyPartScreen.fxml"));
+            Parent tableViewParent = loader.load();
+
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            ModifyPartScreenController controller = loader.getController();
+            controller.initPartData(partTableView.getSelectionModel().getSelectedItem(), 
+                    partTableView.getSelectionModel().selectedIndexProperty().get());
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
+        }
     }
     
     public void deletePart() 
     {
-        ObservableList<Parts> selectedRows, allParts;
-        allParts = partTableView.getItems();
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete?", ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
         
-        selectedRows = partTableView.getSelectionModel().getSelectedItems();
-        
-        for (Parts parts: selectedRows)
-        {
-            allParts.remove(parts);
+        if (alert.getResult() == ButtonType.YES) {
+            ObservableList<Parts> selectedRows, allParts;
+            allParts = partTableView.getItems();
+
+            selectedRows = partTableView.getSelectionModel().getSelectedItems();
+
+            for (Parts parts: selectedRows)
+            {
+                allParts.remove(parts);
+            }
         }
     }
     
@@ -145,32 +154,40 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyProduct(ActionEvent event) throws IOException 
     {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/javafxapplication2/AllProducts/ModifyProductScreen.fxml"));
-        Parent tableViewParent = loader.load();
         
-        Scene tableViewScene = new Scene(tableViewParent);
-        
-        ModifyProductScreenController controller = loader.getController();
-        controller.initProductData(productTableView.getSelectionModel().getSelectedItem(), 
-                                   productTableView.getSelectionModel().selectedIndexProperty().get());
-        
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
+        if(productTableView.getSelectionModel().getSelectedItem() != null) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/javafxapplication2/AllProducts/ModifyProductScreen.fxml"));
+            Parent tableViewParent = loader.load();
+
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            ModifyProductScreenController controller = loader.getController();
+            controller.initProductData(productTableView.getSelectionModel().getSelectedItem(), 
+                                       productTableView.getSelectionModel().selectedIndexProperty().get());
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
+        }
     }
     
     public void deleteProduct() 
     {
-        ObservableList<Products> selectedRows, allProducts;
-        allProducts = productTableView.getItems();
-        
-        selectedRows = productTableView.getSelectionModel().getSelectedItems();
-        
-        for(Products products: selectedRows)
-        {
-            allProducts.remove(products);
+        Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure you want to delete?", ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
+
+        if (alert.getResult() == ButtonType.YES) {
+            ObservableList<Products> selectedRows, allProducts;
+            allProducts = productTableView.getItems();
+
+            selectedRows = productTableView.getSelectionModel().getSelectedItems();
+
+            for(Products products: selectedRows)
+            {
+                allProducts.remove(products);
+            }
         }
     }
     

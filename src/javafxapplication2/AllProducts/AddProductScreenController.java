@@ -13,12 +13,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import javafxapplication2.Models.AlertBox;
+import javafxapplication2.Models.Utility;
 import static javafxapplication2.Models.Inventory.addProduct;
 import static javafxapplication2.Models.Inventory.allParts;
 import javafxapplication2.Models.Parts;
@@ -46,19 +48,24 @@ public class AddProductScreenController implements Initializable {
     
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
-        Scene tableViewScene = new Scene(tableViewParent);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to go back?", ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
         
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        
-        window.setScene(tableViewScene);
-        window.show();
+        if (alert.getResult() == ButtonType.YES) {
+            Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
+            Scene tableViewScene = new Scene(tableViewParent);
+
+            Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+            window.setScene(tableViewScene);
+            window.show();
+        }
     }
     
     public void addProductButton(ActionEvent event) throws IOException {
         if(Integer.parseInt(productMinTextField.getText()) > Integer.parseInt(productMaxTextField.getText())) 
         {
-            AlertBox.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
+            Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
         }
         else 
         {
@@ -92,11 +99,16 @@ public class AddProductScreenController implements Initializable {
     }
     
     public void deletePartButton() {
-        if(deleteTableView.getSelectionModel().getSelectedItem() != null) {
-            Parts part = (Parts) deleteTableView.getSelectionModel().getSelectedItem();
-            addAssociatedParts.add(part);
-            addTableView.setItems(addAssociatedParts);
-            deleteAssociatedParts.remove(part);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete?", ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
+        
+        if (alert.getResult() == ButtonType.YES) {
+            if(deleteTableView.getSelectionModel().getSelectedItem() != null) {
+                Parts part = (Parts) deleteTableView.getSelectionModel().getSelectedItem();
+                addAssociatedParts.add(part);
+                addTableView.setItems(addAssociatedParts);
+                deleteAssociatedParts.remove(part);
+            }
         }
     }
     

@@ -95,7 +95,7 @@
                   <Insets right="30.0" />
                </padding>
             </RadioButton>
-            <RadioButton fx:id="outsourcedButton" mnemonicParsing="false" onAction="#radioButtonToggled" text="Outsourced" />
+            <RadioButton fx:id="outSourcedButton" mnemonicParsing="false" onAction="#radioButtonToggled" text="Outsourced" />
          </children>
       </HBox>
    </children>
