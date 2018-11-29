@@ -1,6 +1,6 @@
 package javafxapplication2.AllParts;
 
-import javafxapplication2.Models.MachineID;
+import javafxapplication2.Models.InHouse;
 import javafxapplication2.Models.Outsourced;
 import javafxapplication2.Models.Parts;
 import java.io.IOException;
@@ -19,9 +19,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafxapplication2.FXMLDocumentController;
+import static javafxapplication2.Models.Inventory.updatePart;
 
 public class ModifyPartScreenController implements Initializable {
-    @FXML private Label machineIDLabel;
+    @FXML private Label inHouseIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
     @FXML private TextField partNameTextField;
@@ -56,22 +57,27 @@ public class ModifyPartScreenController implements Initializable {
         loader.setLocation(getClass().getResource("/javafxapplication2/FXMLDocument.fxml"));
         Parent tableViewParent = loader.load();
         Scene tableViewScene = new Scene(tableViewParent);
-        FXMLDocumentController controller = loader.getController();
         
-        if(parts instanceof MachineID) 
+        if(parts instanceof InHouse) 
         {
-            controller.modifyDataMachineID(Integer.parseInt(companyOrID.getText()), rowNumber, partID, partNameTextField.getText(), 
-                                           Integer.parseInt(partInventoryTextField.getText()), 
-                                           partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
-                                           Integer.parseInt(partMinTextField.getText()), companyOrID.getText());
+            InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
+                                             Integer.parseInt(partInventoryTextField.getText()), 
+                                             partPriceTextField.getText(), 
+                                             Integer.parseInt(partMaxTextField.getText()), 
+                                             Integer.parseInt(partMinTextField.getText()));
+            
+            updatePart(rowNumber, updatePart);
         }
         
         if(parts instanceof Outsourced) 
         {
-            controller.modifyDataCompanyName(companyOrID.getText(), rowNumber, partID, partNameTextField.getText(), 
-                                             Integer.parseInt(partInventoryTextField.getText()), 
-                                             partPriceTextField.getText(), Integer.parseInt(partMaxTextField.getText()), 
-                                             Integer.parseInt(partMinTextField.getText()), companyOrID.getText());
+            Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
+                                                   Integer.parseInt(partInventoryTextField.getText()), 
+                                                   partPriceTextField.getText(), 
+                                                   Integer.parseInt(partMaxTextField.getText()), 
+                                                   Integer.parseInt(partMinTextField.getText()));
+            
+            updatePart(rowNumber, updatePart);
         }
         
                 
@@ -84,38 +90,38 @@ public class ModifyPartScreenController implements Initializable {
     public void radioButtonToggled() 
     {
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) {
-            machineIDLabel.setText("Machine ID");
+            inHouseIDLabel.setText("Machine ID");
             companyOrID.setPromptText("Mach ID");
         }
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
-            machineIDLabel.setText("Company Name");
+            inHouseIDLabel.setText("Company Name");
             companyOrID.setPromptText("Comp Nm");
         }
     }
     
     public void initPartData(Parts parts, Integer rowNumber) {
         this.parts = parts;
-        if(parts instanceof MachineID) 
+        if(parts instanceof InHouse) 
         {
             this.inHouseButton.setSelected(true);
-            machineIDLabel.setText("Machine ID");
+            inHouseIDLabel.setText("Machine ID");
             companyOrID.setPromptText("Mach ID");
 
-            MachineID machineIDPart = (MachineID)parts;
-            partID = machineIDPart.getPartID();
-            partNameTextField.setText(machineIDPart.getPartName());
-            partInventoryTextField.setText(Integer.toString(machineIDPart.getPartInventory()));
-            partPriceTextField.setText(machineIDPart.getPartPrice());
-            partMaxTextField.setText(Integer.toString(machineIDPart.getPartMax()));
-            partMinTextField.setText(Integer.toString(machineIDPart.getPartMin()));
-            companyOrID.setText(Integer.toString(machineIDPart.getMachineID()));
+            InHouse inHouseIDPart = (InHouse)parts;
+            partID = inHouseIDPart.getPartID();
+            partNameTextField.setText(inHouseIDPart.getPartName());
+            partInventoryTextField.setText(Integer.toString(inHouseIDPart.getPartInventory()));
+            partPriceTextField.setText(inHouseIDPart.getPartPrice());
+            partMaxTextField.setText(Integer.toString(inHouseIDPart.getPartMax()));
+            partMinTextField.setText(Integer.toString(inHouseIDPart.getPartMin()));
+            companyOrID.setText(Integer.toString(inHouseIDPart.getInHouse()));
             
         }
         
         if(parts instanceof Outsourced) 
         {
             this.outsourcedButton.setSelected(true);
-            machineIDLabel.setText("Company Name");
+            inHouseIDLabel.setText("Company Name");
             companyOrID.setPromptText("Comp Nm");
             
             Outsourced outsourcedPart = (Outsourced)parts;

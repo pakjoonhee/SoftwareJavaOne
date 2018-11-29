@@ -77,7 +77,7 @@
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
-                  <Label fx:id="machineIDLabel" minWidth="80.0" text="Machine ID" />
+                  <Label fx:id="inHouseIDLabel" minWidth="80.0" text="Machine ID" />
                   <TextField fx:id="companyOrID" promptText="Mach ID" />
                </children>
             </HBox>

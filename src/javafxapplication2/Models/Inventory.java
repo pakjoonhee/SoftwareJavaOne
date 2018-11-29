@@ -1,7 +1,5 @@
 package javafxapplication2.Models;
     
-import java.util.ArrayList;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
@@ -16,12 +14,12 @@ public class Inventory {
         return false;
     }
     
-//    public static Parts lookupPart(Integer integer) {
-//        
-//    }
+    public static Parts lookupPart(Integer integer) {
+        return allParts.get(integer);
+    }
     
-    public static void updatePart(Integer integer) {
-        
+    public static void updatePart(Integer integer, Parts part) {
+        allParts.set(integer, part);
     }
     
     public static void addProduct(Products product) {
@@ -32,12 +30,12 @@ public class Inventory {
         return false;
     }
     
-//    public static Products lookupProduct(Integer integer) {
-//        
-//    }
+    public static Products lookupProduct(Integer integer) {
+        return allProducts.get(integer);
+    }
     
-    public static void updateProduct(Integer integer) {
-        
+    public static void updateProduct(Integer integer, Products product) {
+        allProducts.set(integer, product);
     }
         
 }

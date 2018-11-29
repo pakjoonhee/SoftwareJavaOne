@@ -6,14 +6,10 @@
 package javafxapplication2;
 
 import javafxapplication2.AllParts.ModifyPartScreenController;
-import javafxapplication2.Models.MachineID;
-import javafxapplication2.Models.Outsourced;
 import javafxapplication2.Models.Parts;
 import javafxapplication2.Models.Products;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +26,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafxapplication2.AllProducts.ModifyProductScreenController;
 import static javafxapplication2.Models.Inventory.allParts;
+import static javafxapplication2.Models.Inventory.allProducts;
 
 
 public class FXMLDocumentController implements Initializable {
@@ -49,6 +47,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML private TableColumn<Products, String> productPriceColumn;
     
     @FXML private TextField partSearchTextField;
+    @FXML private TextField productSearchTextField;
     
     @FXML
      private void exitButtonAction(){
@@ -56,7 +55,6 @@ public class FXMLDocumentController implements Initializable {
          stage.close();
      }
     
-     
     public void searchParts() 
     {
         TableColumn<Parts, String> column = partIdColumn;
@@ -69,6 +67,22 @@ public class FXMLDocumentController implements Initializable {
             if(Integer.parseInt(column.getCellObservableValue(parts).getValue()) == Integer.parseInt(partSearchTextField.getText())) 
             {
                 partTableView.getSelectionModel().select(parts);
+            }
+        }
+    }
+    
+    public void searchProducts() 
+    {
+        TableColumn<Products, String> column = productIdColumn;
+    
+        ObservableList<Products> allProducts;
+        allProducts = productTableView.getItems();
+
+        for(int products = 0; products < allProducts.size(); products++) 
+        {
+            if(Integer.parseInt(column.getCellObservableValue(products).getValue()) == Integer.parseInt(productSearchTextField.getText())) 
+            {
+                productTableView.getSelectionModel().select(products);
             }
         }
     }
@@ -131,8 +145,15 @@ public class FXMLDocumentController implements Initializable {
     
     public void changeScreenModifyProduct(ActionEvent event) throws IOException 
     {
-        Parent tableViewParent = FXMLLoader.load(getClass().getResource("/javafxapplication2/AllProducts/ModifyProductScreen.fxml"));
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/javafxapplication2/AllProducts/ModifyProductScreen.fxml"));
+        Parent tableViewParent = loader.load();
+        
         Scene tableViewScene = new Scene(tableViewParent);
+        
+        ModifyProductScreenController controller = loader.getController();
+        controller.initProductData(productTableView.getSelectionModel().getSelectedItem(), 
+                                   productTableView.getSelectionModel().selectedIndexProperty().get());
         
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         
@@ -140,25 +161,18 @@ public class FXMLDocumentController implements Initializable {
         window.show();
     }
     
-    public void modifyDataCompanyName(String companyName, Integer rowNumber, String partID, String partName, Integer partInventory, 
-                                      String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
-         partTableView.getItems().set(rowNumber, new Outsourced(companyName, partID, partName, partInventory, partPrice, partMax, partMin));
-    } 
-    
-    public void modifyDataMachineID(Integer machineID, Integer rowNumber, String partID, String partName, Integer partInventory, 
-                                    String partPrice, Integer partMax, Integer partMin, String partcompanyMachineID) {
-         partTableView.getItems().set(rowNumber, new MachineID(machineID, partID, partName, partInventory, partPrice, partMax, partMin));
-    } 
-    
-    public void addDataCompanyName(String companyName, String partID, String partName, Integer partInventory, 
-                                   String partPrice, Integer partMax, Integer partMin) {
-         partTableView.getItems().add(new Outsourced(companyName, partID, partName, partInventory, partPrice, partMax, partMin));
-    } 
-    
-    public void addDataMachineID(Integer machineID, String partID, String partName, Integer partInventory, 
-                                 String partPrice, Integer partMax, Integer partMin) {
-         partTableView.getItems().add(new MachineID(machineID, partID, partName, partInventory, partPrice, partMax, partMin));
-    } 
+    public void deleteProduct() 
+    {
+        ObservableList<Products> selectedRows, allProducts;
+        allProducts = productTableView.getItems();
+        
+        selectedRows = productTableView.getSelectionModel().getSelectedItems();
+        
+        for(Products products: selectedRows)
+        {
+            allProducts.remove(products);
+        }
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -172,20 +186,8 @@ public class FXMLDocumentController implements Initializable {
         productInventoryColumn.setCellValueFactory(new PropertyValueFactory<Products, Integer>("productInventory"));
         productPriceColumn.setCellValueFactory(new PropertyValueFactory<Products, String>("productPrice"));
         
-        
         partTableView.setItems(allParts);
-        productTableView.setItems(getProducts());
-        
+        productTableView.setItems(allProducts);
     }    
     
-      
-    public ObservableList<Products> getProducts()
-    {
-        ObservableList<Products> products = FXCollections.observableArrayList();
-        products.add(new Products("1", "Diapers", 10, "1.01", 2, 1, "Chevron"));
-        products.add(new Products("2", "Towels", 2, "2.02", 3, 2, "Texaco"));
-        products.add(new Products("3", "Napkins", 8, "3.03", 10, 2, "Yay"));
-        products.add(new Products("4", "Soap", 12, "4.04", 9, 5, "Wonderful"));
-        return products;
-    }
 }

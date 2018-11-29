@@ -17,13 +17,11 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import javafxapplication2.FXMLDocumentController;
 import static javafxapplication2.Models.Inventory.addCompanyPart;
-import javafxapplication2.Models.MachineID;
+import javafxapplication2.Models.InHouse;
 import javafxapplication2.Models.Outsourced;
-import javafxapplication2.Models.Parts;
-
 
 public class AddPartScreenController implements Initializable {
-    @FXML private Label machineIDLabel;
+    @FXML private Label inHouseIDLabel;
     @FXML private RadioButton inHouseButton;
     @FXML private RadioButton outsourcedButton;
     @FXML private TextField partIdTextField;
@@ -50,12 +48,12 @@ public class AddPartScreenController implements Initializable {
     public void radioButtonToggled() 
     {
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton)) {
-            machineIDLabel.setText("Machine ID");
+            inHouseIDLabel.setText("Machine ID");
             companyOrID.setPromptText("Mach ID");
             whichToggle = "Machine";
         }
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) {
-            machineIDLabel.setText("Company Name");
+            inHouseIDLabel.setText("Company Name");
             companyOrID.setPromptText("Comp Nm");
             whichToggle = "Company";
         }
@@ -72,14 +70,6 @@ public class AddPartScreenController implements Initializable {
         
         if(this.sourceButtonGroup.getSelectedToggle().equals(this.outsourcedButton)) 
         {
-//            controller.addDataCompanyName(companyOrID.getText(), 
-//                                      Double.toString(Math.random()), 
-//                                      partNameTextField.getText(), 
-//                                      Integer.parseInt(partInventoryTextField.getText()), 
-//                                      partPriceTextField.getText(), 
-//                                      Integer.parseInt(partMaxTextField.getText()), 
-//                                      Integer.parseInt(partMinTextField.getText()));.
-            
             Outsourced newPart = new Outsourced(companyOrID.getText(), 
                                                 Double.toString(Math.random()), 
                                                 partNameTextField.getText(), 
@@ -96,7 +86,7 @@ public class AddPartScreenController implements Initializable {
             window.show();
         } else if(this.sourceButtonGroup.getSelectedToggle().equals(this.inHouseButton))
         {
-            MachineID newPart = new MachineID(Integer.parseInt(companyOrID.getText()), 
+            InHouse newPart = new InHouse(Integer.parseInt(companyOrID.getText()), 
                                               Double.toString(Math.random()), 
                                               partNameTextField.getText(), 
                                               Integer.parseInt(partInventoryTextField.getText()), 
@@ -111,7 +101,6 @@ public class AddPartScreenController implements Initializable {
             window.setScene(tableViewScene);
             window.show();
         }
-         
      }
      
     @Override

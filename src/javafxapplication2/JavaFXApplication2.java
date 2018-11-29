@@ -7,13 +7,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import static javafxapplication2.Models.Inventory.allParts;
-import javafxapplication2.Models.MachineID;
+import javafxapplication2.Models.InHouse;
+import static javafxapplication2.Models.Inventory.allProducts;
 import javafxapplication2.Models.Outsourced;
+import javafxapplication2.Models.Products;
 
-/**
- *
- * @author pakjo
- */
 public class JavaFXApplication2 extends Application {
     
     @Override
@@ -26,17 +24,18 @@ public class JavaFXApplication2 extends Application {
         stage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         allParts = FXCollections.observableArrayList();
         allParts.add(new Outsourced( "Boeing", "1", "Steal Beam", 2, "1.00", 2, 1));
         allParts.add(new Outsourced("Microsoft", "2", "ScrewDriver", 5, "3.00", 4, 2));
-        allParts.add(new MachineID(1990, "4", "Nuts", 11, "4.00", 6, 1));
+        allParts.add(new InHouse(1990, "1990", "Nuts", 11, "4.00", 6, 1));
         
+        allProducts = FXCollections.observableArrayList();
+        allProducts.add(new Products("1", "Diapers", 10, "1.01", 2, 1));
+        allProducts.add(new Products("2", "Towels", 2, "2.02", 3, 2));
+        allProducts.add(new Products("3", "Napkins", 8, "3.03", 10, 2));
+        allProducts.add(new Products("4", "Soap", 12, "4.04", 9, 5));
         
         launch(args);
     }
-    
 }

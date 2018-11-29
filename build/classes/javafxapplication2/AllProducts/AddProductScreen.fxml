@@ -15,7 +15,7 @@
     <children>
       <HBox layoutX="534.0" layoutY="401.0" prefHeight="35.0" prefWidth="141.0" spacing="20.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Save" />
+            <Button mnemonicParsing="false" onAction="#addProductButton" prefHeight="30.0" prefWidth="60.0" text="Save" />
             <Button mnemonicParsing="false" onAction="#changeScreenGoBack" prefHeight="30.0" prefWidth="60.0" text="Cancel" />
          </children>
       </HBox>
@@ -41,7 +41,7 @@
                         <Insets />
                      </opaqueInsets>
                   </Label>
-                  <TextField promptText="Part Name">
+                  <TextField fx:id="productNameTextField" promptText="Part Name">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -51,19 +51,19 @@
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefWidth="80.0" text="Inv" />
-                  <TextField promptText="Inv" />
+                  <TextField fx:id="productInventoryTextField" promptText="Inv" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefWidth="80.0" text="Price/Cost" />
-                  <TextField promptText="Price/Cost" />
+                  <TextField fx:id="productPriceTextField" promptText="Price/Cost" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="80.0" text="Max" />
-                  <TextField prefHeight="25.0" prefWidth="75.0" promptText="Max">
+                  <TextField fx:id="productMaxTextField" prefHeight="25.0" prefWidth="75.0" promptText="Max">
                      <HBox.margin>
                         <Insets right="10.0" />
                      </HBox.margin>
@@ -73,7 +73,7 @@
                         <Insets right="20.0" />
                      </padding>
                   </Label>
-                  <TextField prefWidth="75.0" promptText="Min" />
+                  <TextField fx:id="productMinTextField" prefWidth="75.0" promptText="Min" />
                </children>
             </HBox>
             <HBox prefHeight="41.0" prefWidth="198.0" />
@@ -81,28 +81,28 @@
       </VBox>
       <HBox layoutX="389.0" layoutY="13.0" prefHeight="35.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" text="Search" />
-            <TextField />
+            <Button mnemonicParsing="false" onAction="#searchParts" text="Search" />
+            <TextField fx:id="searchTextField" />
          </children>
       </HBox>
-      <TableView layoutX="320.0" layoutY="48.0" prefHeight="120.0" prefWidth="360.0">
+      <TableView fx:id="addTableView" layoutX="320.0" layoutY="48.0" prefHeight="120.0" prefWidth="360.0">
         <columns>
-          <TableColumn prefWidth="90.0" text="Part ID" />
-          <TableColumn prefWidth="90.0" text="Part Name" />
-            <TableColumn prefWidth="90.0" text="Inventory Level" />
-            <TableColumn prefWidth="90.0" text="Price Per Unit" />
+          <TableColumn fx:id="addPartIdColumn" prefWidth="90.0" text="Part ID" />
+          <TableColumn fx:id="addPartNameColumn" prefWidth="90.0" text="Part Name" />
+            <TableColumn fx:id="addPartInventoryColumn" prefWidth="90.0" text="Inventory Level" />
+            <TableColumn fx:id="addPartPriceColumn" prefWidth="90.0" text="Price Per Unit" />
         </columns>
       </TableView>
-      <TableView layoutX="320.0" layoutY="225.0" prefHeight="120.0" prefWidth="360.0">
+      <TableView fx:id="deleteTableView" layoutX="320.0" layoutY="225.0" prefHeight="120.0" prefWidth="360.0">
          <columns>
-            <TableColumn prefWidth="90.0" text="Part ID" />
-            <TableColumn prefWidth="90.0" text="Part Name" />
-            <TableColumn prefWidth="90.0" text="Inventory Level" />
-            <TableColumn prefWidth="90.0" text="Price Per Unit" />
+            <TableColumn fx:id="deletePartIdColumn" prefWidth="90.0" text="Part ID" />
+            <TableColumn fx:id="deletePartNameColumn" prefWidth="90.0" text="Part Name" />
+            <TableColumn fx:id="deletePartInventoryColumn" prefWidth="90.0" text="Inventory Level" />
+            <TableColumn fx:id="deletePartPriceColumn" prefWidth="90.0" text="Price Per Unit" />
          </columns>
       </TableView>
-      <Button layoutX="612.0" layoutY="355.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Delete" />
-      <Button layoutX="612.0" layoutY="177.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="60.0" text="Add" />
+      <Button layoutX="612.0" layoutY="355.0" mnemonicParsing="false" onAction="#deletePartButton" prefHeight="30.0" prefWidth="60.0" text="Delete" />
+      <Button layoutX="612.0" layoutY="177.0" mnemonicParsing="false" onAction="#addPartButton" prefHeight="30.0" prefWidth="60.0" text="Add" />
       <Label layoutX="25.0" layoutY="22.0" text="Add Product">
          <font>
             <Font name="System Bold" size="14.0" />

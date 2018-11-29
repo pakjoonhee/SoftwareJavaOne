@@ -10,17 +10,15 @@ public class Products {
     private SimpleStringProperty productPrice;
     private SimpleIntegerProperty productMax;
     private SimpleIntegerProperty productMin;
-    private SimpleStringProperty productCompanyMachineID; 
     private ObservableList<Parts> parts;
     
-    public Products(String productID, String productName, Integer productInventory, String productPrice, Integer productMax, Integer productMin, String productCompanyMachineID) {
+    public Products(String productID, String productName, Integer productInventory, String productPrice, Integer productMax, Integer productMin) {
         this.productID = new SimpleStringProperty(productID);
         this.productName = new SimpleStringProperty(productName);
         this.productInventory = new SimpleIntegerProperty(productInventory);
         this.productPrice = new SimpleStringProperty(productPrice);
         this.productMax = new SimpleIntegerProperty(productMax);
         this.productMin = new SimpleIntegerProperty(productMin);
-        this.productCompanyMachineID = new SimpleStringProperty(productCompanyMachineID);
     }
 
     public String getProductID() {
@@ -71,16 +69,19 @@ public class Products {
         this.productMin = productMin;
     }
 
-    public String getProductCompanyMachineID() {
-        return productCompanyMachineID.get();
-    }
-
-    public void setProductCompanyMachineID(SimpleStringProperty productCompanyMachineID) {
-        this.productCompanyMachineID = productCompanyMachineID;
-    }
-
     public ObservableList<Parts> getParts() {
         return parts;
     }
     
+    public void addAssociatedPart(Parts part) {
+        
+    }
+    
+    public boolean removeAssociated(Integer integer) {
+        return false;
+    }
+    
+    public Parts lookupAssociated(Integer integer) {
+        return parts.get(integer);
+    }
 }
