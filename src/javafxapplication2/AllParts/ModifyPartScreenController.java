@@ -64,6 +64,9 @@ public class ModifyPartScreenController implements Initializable {
         {
             Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
         }
+        else if(!Utility.checkDouble(Utility.formatPrice(partPriceTextField.getText()))) {
+            Utility.minTooHigh("ERROR!", "Enter a valid Price!");
+        }
         else 
         {
             FXMLLoader loader = new FXMLLoader();
@@ -76,7 +79,7 @@ public class ModifyPartScreenController implements Initializable {
                 if(companyOrID.getText().matches("-?\\d+")) {
                     InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
                                                  Integer.parseInt(partInventoryTextField.getText()), 
-                                                 partPriceTextField.getText(), 
+                                                 Utility.formatPrice(partPriceTextField.getText()), 
                                                  Integer.parseInt(partMaxTextField.getText()), 
                                                  Integer.parseInt(partMinTextField.getText()));
 
@@ -96,7 +99,7 @@ public class ModifyPartScreenController implements Initializable {
             {
                 Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
                                                        Integer.parseInt(partInventoryTextField.getText()), 
-                                                       partPriceTextField.getText(), 
+                                                       Utility.formatPrice(partPriceTextField.getText()), 
                                                        Integer.parseInt(partMaxTextField.getText()), 
                                                        Integer.parseInt(partMinTextField.getText()));
 
@@ -112,7 +115,7 @@ public class ModifyPartScreenController implements Initializable {
             {
                 Outsourced updatePart = new Outsourced(companyOrID.getText(), partID, partNameTextField.getText(), 
                                                        Integer.parseInt(partInventoryTextField.getText()), 
-                                                       partPriceTextField.getText(), 
+                                                       Utility.formatPrice(partPriceTextField.getText()), 
                                                        Integer.parseInt(partMaxTextField.getText()), 
                                                        Integer.parseInt(partMinTextField.getText()));
 
@@ -129,7 +132,7 @@ public class ModifyPartScreenController implements Initializable {
                 if(companyOrID.getText().matches("-?\\d+")) {
                     InHouse updatePart = new InHouse(Integer.parseInt(companyOrID.getText()), partID, partNameTextField.getText(), 
                                                  Integer.parseInt(partInventoryTextField.getText()), 
-                                                 partPriceTextField.getText(), 
+                                                 Utility.formatPrice(partPriceTextField.getText()), 
                                                  Integer.parseInt(partMaxTextField.getText()), 
                                                  Integer.parseInt(partMinTextField.getText()));
 
@@ -143,7 +146,6 @@ public class ModifyPartScreenController implements Initializable {
                     Utility.minTooHigh("Error!", "Enter a Number for MachineID!");
                 }
             }
-
         }
     }
     
@@ -203,7 +205,6 @@ public class ModifyPartScreenController implements Initializable {
         this.inHouseButton.setToggleGroup(sourceButtonGroup);
         this.outSourcedButton.setToggleGroup(sourceButtonGroup);
         
-        Utility.addListener(partPriceTextField);
         Utility.addListener(partInventoryTextField);
         Utility.addListener(partMinTextField);
         Utility.addListener(partMaxTextField);

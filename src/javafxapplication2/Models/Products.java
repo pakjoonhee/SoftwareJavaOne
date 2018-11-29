@@ -12,13 +12,14 @@ public class Products {
     private SimpleIntegerProperty productMin;
     private ObservableList<Parts> parts;
     
-    public Products(String productID, String productName, Integer productInventory, String productPrice, Integer productMax, Integer productMin) {
+    public Products(String productID, String productName, Integer productInventory, String productPrice, Integer productMax, Integer productMin, ObservableList<Parts> parts) {
         this.productID = new SimpleStringProperty(productID);
         this.productName = new SimpleStringProperty(productName);
         this.productInventory = new SimpleIntegerProperty(productInventory);
         this.productPrice = new SimpleStringProperty(productPrice);
         this.productMax = new SimpleIntegerProperty(productMax);
         this.productMin = new SimpleIntegerProperty(productMin);
+        this.parts = parts;
     }
 
     public String getProductID() {
@@ -73,12 +74,12 @@ public class Products {
         return parts;
     }
     
-    public void addAssociatedPart(Parts part) {
-        
+    public void addAssociatedPart(Parts part, ObservableList<Parts> parts) {
+        parts.add(part);
     }
     
-    public boolean removeAssociated(Integer integer) {
-        return false;
+    public void removeAssociated(Parts part, ObservableList<Parts> parts) {
+        parts.remove(part);
     }
     
     public Parts lookupAssociated(Integer integer) {

@@ -1,5 +1,7 @@
 package javafxapplication2.Models;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -45,5 +47,34 @@ public class Utility {
         Scene scene = new Scene(layout);
         window.setScene(scene);
         window.showAndWait();
+    }
+    
+    public static boolean checkDouble(String string) {
+        boolean numeric = true;
+
+        try {
+            Double num = Double.parseDouble(string);
+        } catch (NumberFormatException e) {
+            numeric = false;
+        }
+        
+        return numeric;
+    }
+    
+    public static boolean checkMinHigher(String min, String max) {
+        boolean higher = true;
+
+        if(Integer.parseInt(min) > Integer.parseInt(max)) {
+            higher = false;
+        }
+        
+        return higher;
+    }
+    
+    public static String formatPrice(String string) {
+        Double formatDouble = Double.parseDouble(string);
+        DecimalFormat df = new DecimalFormat("#.00"); 
+        
+        return df.format(formatDouble);
     }
 }

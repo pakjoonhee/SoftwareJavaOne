@@ -10,8 +10,8 @@ public class Inventory {
         allParts.add(part);
     }
     
-    public static boolean deletePart(Parts part) {
-        return false;
+    public static void deletePart(Parts part) {
+        allParts.remove(part);
     }
     
     public static Parts lookupPart(Integer integer) {
@@ -26,8 +26,8 @@ public class Inventory {
         allProducts.add(product);
     }
     
-    public static boolean removeProduct(Integer integer) {
-        return false;
+    public static void removeProduct(Products product) {
+        allProducts.remove(product);
     }
     
     public static Products lookupProduct(Integer integer) {

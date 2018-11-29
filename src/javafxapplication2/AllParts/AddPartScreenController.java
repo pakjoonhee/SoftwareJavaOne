@@ -2,6 +2,7 @@ package javafxapplication2.AllParts;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.Random;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -38,8 +39,6 @@ public class AddPartScreenController implements Initializable {
     @FXML private TextField partMinTextField;
     @FXML private TextField companyOrID;
     private ToggleGroup sourceButtonGroup;
-    
-   
 
     public void changeScreenGoBack(ActionEvent event) throws IOException 
     {
@@ -81,13 +80,16 @@ public class AddPartScreenController implements Initializable {
         return randomNum;
     }
     
+    
+    
     public void addPartButton(ActionEvent event) throws IOException {
         
-        if(Integer.parseInt(partMinTextField.getText()) > Integer.parseInt(partMaxTextField.getText())) 
-        {
+        if(!Utility.checkMinHigher(partMinTextField.getText(), partMaxTextField.getText())) {
             Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
         }
-        
+        else if(!Utility.checkDouble(partPriceTextField.getText())) {
+            Utility.minTooHigh("ERROR!", "Enter a valid Price!");
+        }
         else 
         {
             FXMLLoader loader = new FXMLLoader();
@@ -107,12 +109,12 @@ public class AddPartScreenController implements Initializable {
                         randomNum = generator.nextInt(1000);
                     }
                 }
-
+                
                 Outsourced newPart = new Outsourced(companyOrID.getText(), 
                                                     Integer.toString(getRandomNumber()), 
                                                     partNameTextField.getText(), 
                                                     Integer.parseInt(partInventoryTextField.getText()), 
-                                                    partPriceTextField.getText(), 
+                                                    Utility.formatPrice(partPriceTextField.getText()), 
                                                     Integer.parseInt(partMaxTextField.getText()), 
                                                     Integer.parseInt(partMinTextField.getText()));
 
@@ -129,7 +131,7 @@ public class AddPartScreenController implements Initializable {
                                               Integer.toString(getRandomNumber()), 
                                               partNameTextField.getText(), 
                                               Integer.parseInt(partInventoryTextField.getText()), 
-                                              partPriceTextField.getText(), 
+                                              Utility.formatPrice(partPriceTextField.getText()), 
                                               Integer.parseInt(partMaxTextField.getText()), 
                                               Integer.parseInt(partMinTextField.getText()));
 
@@ -153,7 +155,6 @@ public class AddPartScreenController implements Initializable {
         this.inHouseButton.setToggleGroup(sourceButtonGroup);
         this.outSourcedButton.setToggleGroup(sourceButtonGroup);
         
-        Utility.addListener(partPriceTextField);
         Utility.addListener(partInventoryTextField);
         Utility.addListener(partMinTextField);
         Utility.addListener(partMaxTextField);

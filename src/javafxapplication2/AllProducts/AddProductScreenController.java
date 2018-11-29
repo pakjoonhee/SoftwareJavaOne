@@ -67,6 +67,9 @@ public class AddProductScreenController implements Initializable {
         {
             Utility.minTooHigh("ERROR!", "The Minimum cannot be more than the maximum!");
         }
+        else if(!Utility.checkDouble(productPriceTextField.getText())) {
+            Utility.minTooHigh("ERROR!", "Enter a valid Price!");
+        }
         else 
         {
             FXMLLoader loader = new FXMLLoader();
@@ -76,9 +79,10 @@ public class AddProductScreenController implements Initializable {
             Products newProduct = new Products( Integer.toString(getRandomNumber()), 
                                                 productNameTextField.getText(), 
                                                 Integer.parseInt(productInventoryTextField.getText()), 
-                                                productPriceTextField.getText(), 
+                                                Utility.formatPrice(productPriceTextField.getText()), 
                                                 Integer.parseInt(productMaxTextField.getText()), 
-                                                Integer.parseInt(productMinTextField.getText()));
+                                                Integer.parseInt(productMinTextField.getText()),
+                                                deleteAssociatedParts);
 
             addProduct(newProduct);
 
@@ -153,6 +157,9 @@ public class AddProductScreenController implements Initializable {
         
         addAssociatedParts.addAll(allParts);
         addTableView.setItems(addAssociatedParts);
+        
+        Utility.addListener(productInventoryTextField);
+        Utility.addListener(productMinTextField);
+        Utility.addListener(productMaxTextField);
     }    
-    
 }
